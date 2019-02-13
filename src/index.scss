@@ -3,7 +3,6 @@
 // ----------------------
 
 // Color Palette
-
 $black: #0E0D0E;
 $white: #FFF;
 $light-blue: #DFDEE5;
@@ -11,8 +10,13 @@ $gray: #866C76;
 $light-gray: #4E463F;
 $dark-gray: #36302E;
 
+
 // Font Families
-$title-font-family: Teko, sans-serif;
+$bold-font-family: Teko, sans-serif;
+$light-font-family: Rajdhani, sans-serif;
+
+$title-font-family: $bold-font-family;
+$body-font-family: $light-font-family;
 
 // Font Colors
 $light-font-color: $light-blue;
@@ -55,14 +59,17 @@ h3 {
 
 h4 {
   font-size: $font-size-large;
+  font-weight: normal;
 }
 
 h5 {
   font-size: $font-size-medium;
+  font-weight: normal;
 }
 
 h6 {
   font-size: $font-size-small;
+  font-weight: normal;
 }
 
 html,
@@ -71,7 +78,7 @@ body {
   display: block;
   margin: 0;
   padding: 0;
-  font-family: Tahoma;
+  font-family: $body-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $light-font-color;

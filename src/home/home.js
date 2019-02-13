@@ -6,6 +6,7 @@ export default () => (
     <div className="row">
       <div className="six column">
         <h1 className='home-page__title'> Daniel Zamorano </h1>
+        <h4 className='home-page__subtitle'> Work in progress </h4>
       </div>
     </div>
   </div>

@@ -3,10 +3,25 @@
 $main-title-font: $title-font-family !default;
 
 .home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &__title,
+  &__subtitle {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   &__title {
     font-size: 9vw;
     text-transform: uppercase;
     font-family: $main-title-font;
-    text-align: center;
+  }
+
+  &__subtitle {
+    font-size: 3vw;
   }
 }
