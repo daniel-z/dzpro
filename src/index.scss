@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+// ----------------------
+// Variables
+// ----------------------
+
+// Color Palette
+
+$black: #0E0D0E;
+$white: #0E0D0E;
+
+$light-blue: #DFDEE5;
+$gray: #866C76;
+$light-gray: #4E463F;
+$dark-gray: #36302E;
+
+// Font Colors
+$light-font-color: $light-blue;
+$medium-font-color: $gray;
+$dark-font-color: $black;
+
+// Font Sizes
+$font-size-xsmall: 8px;
+$font-size-small: 12px;
+$font-size-medium: 16px;
+$font-size-large: 18px;
+$font-size-xlarge: 22px;
+$font-size-xxlarge: 30px;
+$font-size-xxxlarge: 34px;
+
+// Headers
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: $light-font-color;
+}
+
+h1 {
+  font-size: $font-size-xxxlarge;
+}
+
+h2 {
+  font-size: $font-size-xxlarge;
+}
+
+h3 {
+  font-size: $font-size-xlarge;
+}
+
+h4 {
+  font-size: $font-size-large;
+}
+
+h5 {
+  font-size: $font-size-medium;
+}
+
+h6 {
+  font-size: $font-size-small;
+}
