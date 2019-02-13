@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.scss';
+import '../components/particles-pointer-tracker';
 
 export default () => (
   <div className="home-page">

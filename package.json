@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "babel-loader": "8.0.4",
+    "dat.gui": "^0.7.5",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
