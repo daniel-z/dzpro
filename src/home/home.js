@@ -1,8 +1,12 @@
 import React from 'react';
-import './home.css';
+import './home.scss';
 
 export default () => (
   <div className="home-page">
-    <h1> Daniel Zamorano </h1>
+    <div className="row">
+      <div className="six column">
+        <h1 className='home-page__title'> Daniel Zamorano </h1>
+      </div>
+    </div>
   </div>
 );

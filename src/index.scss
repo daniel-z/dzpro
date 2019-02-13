@@ -1,18 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 // ----------------------
 // Variables
 // ----------------------
@@ -20,12 +5,14 @@ code {
 // Color Palette
 
 $black: #0E0D0E;
-$white: #0E0D0E;
-
+$white: #FFF;
 $light-blue: #DFDEE5;
 $gray: #866C76;
 $light-gray: #4E463F;
 $dark-gray: #36302E;
+
+// Font Families
+$title-font-family: Teko, sans-serif;
 
 // Font Colors
 $light-font-color: $light-blue;
@@ -76,4 +63,17 @@ h5 {
 
 h6 {
   font-size: $font-size-small;
+}
+
+html,
+body {
+  height: 100vh;
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: Tahoma;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $light-font-color;
+  background-color: $black;
 }

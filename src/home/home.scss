@@ -1,0 +1,12 @@
+@import "../index";
+
+$main-title-font: $title-font-family !default;
+
+.home-page {
+  &__title {
+    font-size: 9vw;
+    text-transform: uppercase;
+    font-family: $main-title-font;
+    text-align: center;
+  }
+}
