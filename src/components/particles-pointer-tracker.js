@@ -1,143 +1,200 @@
 import * as dat from 'dat.gui';
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let w = ctx.canvas.width = window.innerWidth;
-let h = ctx.canvas.height = window.innerHeight;
+class particlesTracker {
+  dots = [];
+  particleCount = 100;
+  radius = 3;
+  trail = 1;
+  hueStart = 200;
+  hueRange = 40;
+  lerpMax = 0.95;
+  lerpMin = 0.5;
+  rotation = 10;
+  select = { shape: 2 };
 
-window.onresize = () => {
-  w = ctx.canvas.width = window.innerWidth;
-  h = ctx.canvas.height = window.innerHeight;
-};
-
-let dots = [];
-let cX = w/2;
-let cY = h/2;
-let particleCount = 1000;
-let radius = 3;
-let trail = 1;
-let hueStart = 200;
-let hueRange = 40;
-let lerpMax = 0.95;
-let lerpMin = 0.5;
-let rotation = 10;
-let select = {shape: 2};
-
-const controls = new function() {
-  this.particleCount = particleCount;
-  this.radius = radius;
-  this.trail = trail;
-  this.hueStart = hueStart;
-  this.hueRange = hueRange;
-  this.lerpMin = lerpMin;
-  this.lerpMax = lerpMax;
-  this.rotation = rotation;
-
-  this.redraw = function() {
-    particleCount = controls.particleCount;
-    radius = controls.radius;
-    trail = controls.trail;
-    hueStart = controls.hueStart;
-    hueRange = controls.hueRange;
-    lerpMin = controls.lerpMin;
-    lerpMax = controls.lerpMax;
-    rotation = controls.rotation;
-    // let shape = Object.values(select)[0];
-
-    dots = [];
-    emit();
+  constructor(height, width) {
+    this.canvas = document.getElementById("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.w = this.ctx.canvas.width = window.innerWidth;
+    this.h = this.ctx.canvas.height = window.innerHeight;
+    this.cX = this.w/2;
+    this.cY = this.h/2;
   }
-}();
 
-const gui = new dat.GUI({ resizable : false });
+  init() {
+    this.initializeEvents();
+    this.emit();
+    this.draw();
+  }
 
-gui.add(controls, "particleCount", 10, 3000).step(10).onChange(controls.redraw);
-gui.add(controls, "radius", 1, 10).onChange(controls.redraw);
-gui.add(controls, "rotation", 1, 30).step(1).onChange(controls.redraw);
-gui.add(controls, "lerpMin", 0.5, 0.9).onChange(controls.redraw);
-gui.add(controls, "lerpMax", 0.9, 0.99).onChange(controls.redraw);
-gui.add(controls, "hueStart", 0, 360).step(1).onChange(controls.redraw);
-gui.add(controls, "hueRange", 0, 50).step(1).onChange(controls.redraw);
-gui.add(controls, "trail", 0.02, 1).onChange(controls.redraw);
+  initializeEvents() {
+    window.onresize = function () { this.onResize(); };
+    document.onmousemove = (event) => { this.onMouseOver(event) };
+    document.ontouchmove = (event) => { this.onTouchMove(event) };
 
-gui.add(select, 'shape', {
-  circle: 0,
-  infinity: 1,
-  bouncy_triangle: 2,
-  vortex: 3
-}).onChange(controls.redraw);
+    setTimeout(() => {
+      clearTimeout(setInterval( this.prev, 17));
+    }, 2000);
+  }
 
+  onResize() {
+    this.w = this.ctx.canvas.width = window.innerWidth;
+    this.h = this.ctx.canvas.height = window.innerHeight;
+  }
 
-function emit(){
-  for(var i=0; i<particleCount; i++){
-    dots.push({
-      x: 0,
-      y: 0,
-      h: Math.random()*((hueStart+hueRange)-(hueStart-hueRange))+(hueStart-hueRange),
-      a: (i+1)*(360/particleCount),
-      n: Math.random()*(lerpMax-lerpMin)+lerpMin
+  onMouseOver(event) {
+    this.cX = event.pageX;
+    this.cY = event.pageY;
+  }
+
+  onTouchMove(event) {
+    this.cX = event.touches[0].pageX;
+    this.cY = event.touches[0].pageY;
+  }
+
+  change(attribute, data) {
+    if (!data) {
+      return;
+    }
+
+    if (attribute === 'shape') {
+      this.select.shape = parseInt(data);
+    } else {
+      this[attribute] = data;
+    }
+
+    this.dots = [];
+    this.emit();
+  }
+
+  emit() {
+    for (let i=0; i < this.particleCount; i++) {
+      this.dots.push({
+        x: 0,
+        y: 0,
+        h: Math.random()*((this.hueStart+this.hueRange)-(this.hueStart-this.hueRange))+(this.hueStart-this.hueRange),
+        a: (i+1)*(360/this.particleCount),
+        n: Math.random()*(this.lerpMax-this.lerpMin)+this.lerpMin
+      });
+    }
+  }
+
+  draw() {
+    this.ctx.fillStyle = "rgba(0,0,0," + this.trail + ")";
+    this.ctx.rect(0,0, this.w, this.h);
+    this.ctx.fill();
+    let dots = this.dots;
+    let radius = this.radius;
+    let cX = this.cX;
+    let cY = this.cY;
+
+    for (let i=0; i < dots.length; i++) {
+      let lerpX = this.lerp(cX, dots[i].x, dots[i].n);
+      let lerpY = this.lerp(cY, dots[i].y, dots[i].n);
+
+      this.ctx.beginPath();
+      this.ctx.fillStyle = "hsla("+(dots[i].h)+", 100%, 50%, 1)";
+      this.ctx.arc(dots[i].x, dots[i].y, radius * (dots[i].n * dots[i].n), 0, Math.PI*2);
+      this.ctx.fill();
+      this.ctx.closePath();
+
+      dots[i].a += this.rotation % 360;
+
+      if (this.select.shape === 0) {
+        dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
+        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, dots[i].n), lerpY, dots[i].a).y;
+      } else if (this.select.shape === 1){
+        dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
+        dots[i].y = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).y;
+      } else if (this.select.shape === 2){
+        dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
+        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.sin(dots[i].n)), dots[i].a).y;
+      } else if (this.select.shape === 3){
+        dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.tan(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
+        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.asin(dots[i].n)), this.lerp(cY, dots[i].y, Math.asin(dots[i].n)), dots[i].a).y;
+      }
+    }
+
+    setTimeout(() => {
+      requestAnimationFrame(() => { this.draw(); });
+    }, 0);
+  }
+
+  rotate(pointX, pointY, originX, originY, angle) {
+    const newAngle = angle * Math.PI / 180.0;
+    return {
+      x: Math.cos(newAngle) * (pointX - originX) - Math.sin(newAngle) * (pointY - originY) + originX,
+      y: Math.sin(newAngle) * (pointX - originX) + Math.cos(newAngle) * (pointY - originY) + originY
+    };
+  }
+
+  lerp(p1, p2, n) {
+    return (1 - n) * p1 + n * p2;
+  }
+
+  prev () {
+    this.cX += 20;
+  }
+}
+
+const particlesTracker1 = new particlesTracker();
+particlesTracker1.init();
+
+// controls
+class Controls {
+  guiSettings = {
+    resizable : false,
+    hideable: true,
+    closeOnTop: true
+  };
+
+  initialControlSettings = [];
+
+  constructor(particleInstance, initialControlSettings) {
+    this.gui = new dat.GUI(this.guiSettings);
+    this.elementToControl = particleInstance;
+    this.initialControlSettings = initialControlSettings;
+  }
+
+  change(attribute, data) {
+    console.log(attribute, data);
+    this.elementToControl.change(attribute, data);
+  }
+
+  initialize() {
+    this.initialControlSettings.forEach((controlSetting) => {
+      const guiControl = this.gui
+        .add(this.elementToControl, controlSetting.attr, controlSetting.min, controlSetting.max)
+        .onChange((data) => {this.change(controlSetting.attr, data)});
+
+      if (controlSetting.step) {
+        guiControl.step(controlSetting.step);
+      }
+    });
+
+    this.gui.add(this.elementToControl.select, 'shape', {
+      circle: 0,
+      infinity: 1,
+      bouncy_triangle: 2,
+      vortex: 3
+    }).onChange((data) => {
+      this.change('shape', data)
     });
   }
 }
 
-function draw(){
-  ctx.fillStyle = "rgba(0,0,0,"+trail+")";
-  ctx.rect(0,0,w,h);
-  ctx.fill();
-  for(var i=0; i<dots.length; i++){
-    let lerpX = lerp(cX, dots[i].x, dots[i].n);
-    let lerpY = lerp(cY, dots[i].y, dots[i].n);
-    ctx.beginPath();
-    ctx.fillStyle = "hsla("+(dots[i].h)+", 100%, 50%, 1)";
-    ctx.arc(dots[i].x, dots[i].y, radius*(dots[i].n*dots[i].n), 0, Math.PI*2);
-    //ctx.rect(dots[i].x, dots[i].y, radius, radius);
-    ctx.fill();
-    ctx.closePath();
-    dots[i].a += rotation%360;
-    if(Object.values(select)[0] === 0){
-      dots[i].x = rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
-      dots[i].y = rotate(dots[i].x, dots[i].y, lerp(cX, dots[i].x, dots[i].n), lerpY, dots[i].a).y;
-    } else if(Object.values(select)[0] === 1){
-      dots[i].x = rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
-      dots[i].y = rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).y;
-    } else if(Object.values(select)[0] === 2){
-      dots[i].x = rotate(dots[i].x, dots[i].y, lerp(cX, dots[i].x, Math.sin(dots[i].n)), lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
-      dots[i].y = rotate(dots[i].x, dots[i].y, lerp(cX, dots[i].x, Math.sin(dots[i].n)), lerp(cY, dots[i].y, Math.sin(dots[i].n)), dots[i].a).y;
-    } else if(Object.values(select)[0] === 3){
-      dots[i].x = rotate(dots[i].x, dots[i].y, lerp(cX, dots[i].x, Math.tan(dots[i].n)), lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
-      dots[i].y = rotate(dots[i].x, dots[i].y, lerp(cX, dots[i].x, Math.asin(dots[i].n)), lerp(cY, dots[i].y, Math.asin(dots[i].n)), dots[i].a).y;
-    }
-  }
-  requestAnimationFrame(draw);
-}
+const initialControlSettings = [
+  { attr: 'particleCount', min: 10, max: 3000, step: 10 },
+  { attr: 'rotation', min: 1, max: 30, step: 1 },
+  { attr: 'hueStart', min: 0, max: 360, step: 1 },
+  { attr: 'hueRange', min: 0, max: 50, step: 1 },
+  { attr: 'radius', min: 1, max: 10 },
+  { attr: 'lerpMin', min: 0.5, max: 0.9 },
+  { attr: 'lerpMax', min: 0.9, max: 0.99 },
+  { attr: 'trail', min: 0.02, max: 1 },
+];
 
-function rotate(pointX, pointY, originX, originY, angle) {
-  angle = angle * Math.PI / 180.0;
-  return {
-    x: Math.cos(angle) * (pointX-originX) - Math.sin(angle) * (pointY-originY) + originX,
-    y: Math.sin(angle) * (pointX-originX) + Math.cos(angle) * (pointY-originY) + originY
-  };
-}
+const controls1 = new Controls(particlesTracker1, initialControlSettings);
 
-function lerp(p1, p2, n){
-  return (1 - n) * p1 + n * p2;
-}
+controls1.initialize();
 
-document.onmousemove = function(e){
-  cX = e.pageX;
-  cY = e.pageY;
-}
-
-document.ontouchmove = function(e){
-  cX = e.touches[0].pageX;
-  cY = e.touches[0].pageY;
-}
-
-emit();
-draw();
-
-function prev(){
-  cX += 20;
-}
-
-setTimeout(function(){ clearTimeout(setInterval(prev, 17));}, 700);
