@@ -10,7 +10,28 @@ class particlesTracker {
   lerpMax = 0.95;
   lerpMin = 0.5;
   rotation = 10;
-  select = { shape: 2 };
+  shape = { shape: 2 };
+
+  controlsSettings = [
+    { attr: 'particleCount', min: 10, max: 3000, step: 10 },
+    { attr: 'rotation', min: 1, max: 30, step: 1 },
+    { attr: 'hueStart', min: 0, max: 360, step: 1 },
+    { attr: 'hueRange', min: 0, max: 50, step: 1 },
+    { attr: 'radius', min: 1, max: 10 },
+    { attr: 'lerpMin', min: 0.5, max: 0.9 },
+    { attr: 'lerpMax', min: 0.9, max: 0.99 },
+    { attr: 'trail', min: 0.02, max: 1 },
+    {
+      type: 'select',
+      attribute: 'shape',
+      values: {
+        circle: 0,
+        infinity: 1,
+        bouncy_triangle: 2,
+        vortex: 3
+      }
+    }
+  ];
 
   constructor(height, width) {
     this.canvas = document.getElementById("canvas");
@@ -28,13 +49,13 @@ class particlesTracker {
   }
 
   initializeEvents() {
-    window.onresize = function () { this.onResize(); };
+    window.onresize = () => { this.onResize(); };
     document.onmousemove = (event) => { this.onMouseOver(event) };
     document.ontouchmove = (event) => { this.onTouchMove(event) };
 
     setTimeout(() => {
       clearTimeout(setInterval( this.prev, 17));
-    }, 2000);
+    }, 700);
   }
 
   onResize() {
@@ -58,7 +79,7 @@ class particlesTracker {
     }
 
     if (attribute === 'shape') {
-      this.select.shape = parseInt(data);
+      this.shape.shape = parseInt(data);
     } else {
       this[attribute] = data;
     }
@@ -100,16 +121,16 @@ class particlesTracker {
 
       dots[i].a += this.rotation % 360;
 
-      if (this.select.shape === 0) {
+      if (this.shape.shape === 0) {
         dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
         dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, dots[i].n), lerpY, dots[i].a).y;
-      } else if (this.select.shape === 1){
+      } else if (this.shape.shape === 1){
         dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
         dots[i].y = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).y;
-      } else if (this.select.shape === 2){
+      } else if (this.shape.shape === 2){
         dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
         dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.sin(dots[i].n)), dots[i].a).y;
-      } else if (this.select.shape === 3){
+      } else if (this.shape.shape === 3){
         dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.tan(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
         dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.asin(dots[i].n)), this.lerp(cY, dots[i].y, Math.asin(dots[i].n)), dots[i].a).y;
       }
@@ -145,56 +166,53 @@ class Controls {
   guiSettings = {
     resizable : false,
     hideable: true,
-    closeOnTop: true
+    closeOnTop: true,
+    closed: true
   };
 
+  gui = {};
+  elementToControl = {};
   initialControlSettings = [];
 
-  constructor(particleInstance, initialControlSettings) {
+  constructor(elementToControl) {
     this.gui = new dat.GUI(this.guiSettings);
-    this.elementToControl = particleInstance;
-    this.initialControlSettings = initialControlSettings;
+    this.elementToControl = elementToControl;
+    this.initialControlSettings = elementToControl.controlsSettings;
   }
 
   change(attribute, data) {
-    console.log(attribute, data);
     this.elementToControl.change(attribute, data);
+  }
+
+  createSelectControl(control) {
+    this.gui.add(this.elementToControl[control.attribute], control.attribute, control.values)
+      .onChange((data) => {
+        this.change(control.attribute, data)
+      });
+  }
+
+  createSliderControl(control) {
+    const guiControl = this.gui
+      .add(this.elementToControl, control.attr, control.min, control.max)
+      .onChange((data) => { this.change(control.attr, data) });
+
+    if (control.step) {
+      guiControl.step(control.step);
+    }
   }
 
   initialize() {
     this.initialControlSettings.forEach((controlSetting) => {
-      const guiControl = this.gui
-        .add(this.elementToControl, controlSetting.attr, controlSetting.min, controlSetting.max)
-        .onChange((data) => {this.change(controlSetting.attr, data)});
-
-      if (controlSetting.step) {
-        guiControl.step(controlSetting.step);
+      if (controlSetting.type === 'select') {
+        this.createSelectControl(controlSetting);
+      } else {
+        this.createSliderControl(controlSetting);
       }
-    });
-
-    this.gui.add(this.elementToControl.select, 'shape', {
-      circle: 0,
-      infinity: 1,
-      bouncy_triangle: 2,
-      vortex: 3
-    }).onChange((data) => {
-      this.change('shape', data)
     });
   }
 }
 
-const initialControlSettings = [
-  { attr: 'particleCount', min: 10, max: 3000, step: 10 },
-  { attr: 'rotation', min: 1, max: 30, step: 1 },
-  { attr: 'hueStart', min: 0, max: 360, step: 1 },
-  { attr: 'hueRange', min: 0, max: 50, step: 1 },
-  { attr: 'radius', min: 1, max: 10 },
-  { attr: 'lerpMin', min: 0.5, max: 0.9 },
-  { attr: 'lerpMax', min: 0.9, max: 0.99 },
-  { attr: 'trail', min: 0.02, max: 1 },
-];
-
-const controls1 = new Controls(particlesTracker1, initialControlSettings);
+const controls1 = new Controls(particlesTracker1);
 
 controls1.initialize();
 
