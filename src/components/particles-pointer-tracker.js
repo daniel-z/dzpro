@@ -3,7 +3,7 @@ import Controls from './particles-controls';
 export default class {
   dots = [];
   particleCount = 500;
-  radius = 10;
+  radius = 5;
   trail = 0.2;
   hueStart = 200;
   hueRange = 40;
@@ -102,26 +102,22 @@ export default class {
     }
   }
 
-  dotForCircle(index, lerpX, lerpY, cX) {
-    const dot = this.dots[index];
+  getRotationForCircle(dot, lerpX, lerpY, cX) {
     dot.x = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).x;
     dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, dot.n), lerpY, dot.a).y;
   }
 
-  drawInfinity(index, lerpX, lerpY) {
-    const dot = this.dots[index];
+  getRotationForInfinity(dot, lerpX, lerpY) {
     dot.x = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).x;
     dot.y = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).y;
   }
 
-  drawTriangle(index, cX, cY) {
-    const dot = this.dots[index];
+  getRotationForTriangle(dot, cX, cY) {
     dot.x = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.sin(dot.n)), this.lerp(cY, dot.y, Math.tan(dot.n)), dot.a).x;
     dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.sin(dot.n)), this.lerp(cY, dot.y, Math.sin(dot.n)), dot.a).y;
   }
 
-  drawVortex(index, cX, cY) {
-    const dot = this.dots[index];
+  getRotationForVortex(dot, cX, cY) {
     dot.x = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.tan(dot.n)), this.lerp(cY, dot.y, Math.tan(dot.n)), dot.a).x;
     dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.asin(dot.n)), this.lerp(cY, dot.y, Math.asin(dot.n)), dot.a).y;
   }
@@ -132,40 +128,67 @@ export default class {
     this.ctx.fill();
   }
 
+  drawDot(dot, radius) {
+    this.ctx.beginPath();
+    this.ctx.fillStyle = `hsla(${dot.h}, 100%, 50%, 1)`;
+    this.ctx.arc(dot.x, dot.y, radius * (dot.n * dot.n), 0, Math.PI*2);
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
+  drawCircle() {
+    this.dots.forEach((dot) => {
+      this.drawDot(dot, this.radius);
+      let lerpX = this.lerp(this.cX, dot.x, dot.n);
+      let lerpY = this.lerp(this.cY, dot.y, dot.n);
+      dot.a += this.rotation % 360;
+      this.getRotationForCircle(dot, lerpX, lerpY, this.cX);
+    });
+  }
+
+  drawInfinity() {
+    this.dots.forEach((dot) => {
+      this.drawDot(dot, this.radius);
+      let lerpX = this.lerp(this.cX, dot.x, dot.n);
+      let lerpY = this.lerp(this.cY, dot.y, dot.n);
+      dot.a += this.rotation % 360;
+      this.getRotationForInfinity(dot, lerpX, lerpY);
+    });
+  }
+
+  drawTriangle() {
+    this.dots.forEach((dot) => {
+      this.drawDot(dot, this.radius);
+      dot.a += this.rotation % 360;
+      this.getRotationForTriangle(dot, this.cX, this.cY);
+    });
+  }
+
+  drawVortex() {
+    this.dots.forEach((dot) => {
+      this.drawDot(dot, this.radius);
+      dot.a += this.rotation % 360;
+      this.getRotationForVortex(dot, this.cX, this.cY);
+    });
+  }
+
   draw() {
     this.setup2DContext();
-    let dots = this.dots;
-    let radius = this.radius;
-    let cX = this.cX;
-    let cY = this.cY;
 
-    for (let i=0; i < dots.length; i++) {
-      let lerpX = this.lerp(cX, dots[i].x, dots[i].n);
-      let lerpY = this.lerp(cY, dots[i].y, dots[i].n);
-
-      this.ctx.beginPath();
-      this.ctx.fillStyle = `hsla(${dots[i].h}, 100%, 50%, 1)`;
-      this.ctx.arc(dots[i].x, dots[i].y, radius * (dots[i].n * dots[i].n), 0, Math.PI*2);
-      this.ctx.fill();
-      this.ctx.closePath();
-
-      dots[i].a += this.rotation % 360;
-
-      switch (this.shape.shape) {
-        case 0:
-          this.dotForCircle(i, lerpX, lerpY, cX);
-          break;
-        case 1:
-          this.drawInfinity(i, lerpX, lerpY);
-          break;
-        case 2:
-          this.drawTriangle(i, cX, cY);
-          break;
-        case 3:
-        default:
-          this.drawVortex(i, cX, cY);
-          break;
-      }
+    switch (this.shape.shape) {
+      case 0:
+        this.drawCircle();
+        break;
+      case 1:
+        this.drawInfinity();
+        break;
+      case 2:
+        this.drawTriangle();
+        break;
+      case 3:
+      default:
+        this.drawVortex();
+        break;
     }
 
     setTimeout(() => {
