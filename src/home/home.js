@@ -1,6 +1,11 @@
 import React from 'react';
+import ParticlesPointerTracker from '../components/particles-pointer-tracker';
+
 import './home.scss';
 import '../components/particles-pointer-tracker';
+
+const particlesTracker = new ParticlesPointerTracker();
+particlesTracker.init();
 
 export default () => (
   <div className="home-page">

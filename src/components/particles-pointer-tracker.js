@@ -1,16 +1,16 @@
-import * as dat from 'dat.gui';
+import Controls from './particles-controls';
 
-class particlesTracker {
+export default class {
   dots = [];
-  particleCount = 100;
-  radius = 3;
-  trail = 1;
+  particleCount = 500;
+  radius = 10;
+  trail = 0.2;
   hueStart = 200;
   hueRange = 40;
-  lerpMax = 0.95;
-  lerpMin = 0.5;
+  lerpMax = 0.85;
+  lerpMin = 0.2;
   rotation = 10;
-  shape = { shape: 2 };
+  shape = { shape: 0 };
 
   controlsSettings = [
     { attr: 'particleCount', min: 10, max: 3000, step: 10 },
@@ -33,19 +33,21 @@ class particlesTracker {
     }
   ];
 
-  constructor(height, width) {
+  constructor() {
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
     this.w = this.ctx.canvas.width = window.innerWidth;
     this.h = this.ctx.canvas.height = window.innerHeight;
     this.cX = this.w/2;
     this.cY = this.h/2;
+    this.UIControls = new Controls(this);
   }
 
   init() {
     this.initializeEvents();
     this.emit();
     this.draw();
+    this.UIControls.initialize();
   }
 
   initializeEvents() {
@@ -100,10 +102,38 @@ class particlesTracker {
     }
   }
 
-  draw() {
-    this.ctx.fillStyle = "rgba(0,0,0," + this.trail + ")";
+  dotForCircle(index, lerpX, lerpY, cX) {
+    const dot = this.dots[index];
+    dot.x = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).x;
+    dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, dot.n), lerpY, dot.a).y;
+  }
+
+  drawInfinity(index, lerpX, lerpY) {
+    const dot = this.dots[index];
+    dot.x = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).x;
+    dot.y = this.rotate(dot.x, dot.y, lerpX, lerpY, dot.a).y;
+  }
+
+  drawTriangle(index, cX, cY) {
+    const dot = this.dots[index];
+    dot.x = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.sin(dot.n)), this.lerp(cY, dot.y, Math.tan(dot.n)), dot.a).x;
+    dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.sin(dot.n)), this.lerp(cY, dot.y, Math.sin(dot.n)), dot.a).y;
+  }
+
+  drawVortex(index, cX, cY) {
+    const dot = this.dots[index];
+    dot.x = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.tan(dot.n)), this.lerp(cY, dot.y, Math.tan(dot.n)), dot.a).x;
+    dot.y = this.rotate(dot.x, dot.y, this.lerp(cX, dot.x, Math.asin(dot.n)), this.lerp(cY, dot.y, Math.asin(dot.n)), dot.a).y;
+  }
+
+  setup2DContext() {
+    this.ctx.fillStyle = `rgba(0,0,0, ${this.trail} )`;
     this.ctx.rect(0,0, this.w, this.h);
     this.ctx.fill();
+  }
+
+  draw() {
+    this.setup2DContext();
     let dots = this.dots;
     let radius = this.radius;
     let cX = this.cX;
@@ -114,25 +144,27 @@ class particlesTracker {
       let lerpY = this.lerp(cY, dots[i].y, dots[i].n);
 
       this.ctx.beginPath();
-      this.ctx.fillStyle = "hsla("+(dots[i].h)+", 100%, 50%, 1)";
+      this.ctx.fillStyle = `hsla(${dots[i].h}, 100%, 50%, 1)`;
       this.ctx.arc(dots[i].x, dots[i].y, radius * (dots[i].n * dots[i].n), 0, Math.PI*2);
       this.ctx.fill();
       this.ctx.closePath();
 
       dots[i].a += this.rotation % 360;
 
-      if (this.shape.shape === 0) {
-        dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
-        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, dots[i].n), lerpY, dots[i].a).y;
-      } else if (this.shape.shape === 1){
-        dots[i].x = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).x;
-        dots[i].y = this.rotate(dots[i].x, dots[i].y, lerpX, lerpY, dots[i].a).y;
-      } else if (this.shape.shape === 2){
-        dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
-        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.sin(dots[i].n)), this.lerp(cY, dots[i].y, Math.sin(dots[i].n)), dots[i].a).y;
-      } else if (this.shape.shape === 3){
-        dots[i].x = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.tan(dots[i].n)), this.lerp(cY, dots[i].y, Math.tan(dots[i].n)), dots[i].a).x;
-        dots[i].y = this.rotate(dots[i].x, dots[i].y, this.lerp(cX, dots[i].x, Math.asin(dots[i].n)), this.lerp(cY, dots[i].y, Math.asin(dots[i].n)), dots[i].a).y;
+      switch (this.shape.shape) {
+        case 0:
+          this.dotForCircle(i, lerpX, lerpY, cX);
+          break;
+        case 1:
+          this.drawInfinity(i, lerpX, lerpY);
+          break;
+        case 2:
+          this.drawTriangle(i, cX, cY);
+          break;
+        case 3:
+        default:
+          this.drawVortex(i, cX, cY);
+          break;
       }
     }
 
@@ -157,62 +189,4 @@ class particlesTracker {
     this.cX += 20;
   }
 }
-
-const particlesTracker1 = new particlesTracker();
-particlesTracker1.init();
-
-// controls
-class Controls {
-  guiSettings = {
-    resizable : false,
-    hideable: true,
-    closeOnTop: true,
-    closed: true
-  };
-
-  gui = {};
-  elementToControl = {};
-  initialControlSettings = [];
-
-  constructor(elementToControl) {
-    this.gui = new dat.GUI(this.guiSettings);
-    this.elementToControl = elementToControl;
-    this.initialControlSettings = elementToControl.controlsSettings;
-  }
-
-  change(attribute, data) {
-    this.elementToControl.change(attribute, data);
-  }
-
-  createSelectControl(control) {
-    this.gui.add(this.elementToControl[control.attribute], control.attribute, control.values)
-      .onChange((data) => {
-        this.change(control.attribute, data)
-      });
-  }
-
-  createSliderControl(control) {
-    const guiControl = this.gui
-      .add(this.elementToControl, control.attr, control.min, control.max)
-      .onChange((data) => { this.change(control.attr, data) });
-
-    if (control.step) {
-      guiControl.step(control.step);
-    }
-  }
-
-  initialize() {
-    this.initialControlSettings.forEach((controlSetting) => {
-      if (controlSetting.type === 'select') {
-        this.createSelectControl(controlSetting);
-      } else {
-        this.createSliderControl(controlSetting);
-      }
-    });
-  }
-}
-
-const controls1 = new Controls(particlesTracker1);
-
-controls1.initialize();
 
