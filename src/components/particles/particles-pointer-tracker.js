@@ -33,8 +33,8 @@ export default class {
     }
   ];
 
-  constructor() {
-    this.canvas = document.getElementById("canvas");
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
     this.w = this.ctx.canvas.width = window.innerWidth;
     this.h = this.ctx.canvas.height = window.innerHeight;

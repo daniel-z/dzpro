@@ -1,14 +1,11 @@
 import React from 'react';
-import ParticlesPointerTracker from '../components/particles-pointer-tracker';
+import ParticlesComponent from '../components/particles/particles-component';
 
 import './home.scss';
-import '../components/particles-pointer-tracker';
 
-const particlesTracker = new ParticlesPointerTracker();
-particlesTracker.init();
-
-export default () => (
+const Home = () => (
   <div className="home-page">
+    <ParticlesComponent id={'particles-home'} />
     <div className="row">
       <div className="six column">
         <h1 className='home-page__title'> Daniel Zamorano </h1>
@@ -17,3 +14,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default Home;
