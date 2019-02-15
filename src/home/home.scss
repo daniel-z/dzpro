@@ -9,6 +9,11 @@ $main-title-font: $title-font-family !default;
   justify-content: center;
   height: 100%;
 
+  &__header {
+    position: absolute;
+    top: 100%/2;
+  }
+
   &__title,
   &__subtitle {
     text-align: center;
@@ -24,4 +29,9 @@ $main-title-font: $title-font-family !default;
   &__subtitle {
     font-size: 3vw;
   }
+}
+
+#particles-home {
+  display: block;
+  height: 100%;
 }

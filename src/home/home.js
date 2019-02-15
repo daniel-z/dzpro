@@ -6,7 +6,7 @@ import './home.scss';
 const Home = () => (
   <div className="home-page">
     <ParticlesComponent id={'particles-home'} />
-    <div className="row">
+    <div className="row home-page__header">
       <div className="six column">
         <h1 className='home-page__title'> Daniel Zamorano </h1>
         <h4 className='home-page__subtitle'> Work in progress </h4>
