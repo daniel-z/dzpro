@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import ParticlesPointerTracker from './particles-pointer-tracker';
+import React, { Component } from "react";
+import ParticlesPointerTracker from "@danielzm/particles-pointer-tracker";
 
 export class ParticlesComponent extends Component {
   componentDidMount() {
@@ -10,7 +10,7 @@ export class ParticlesComponent extends Component {
   render(props) {
     return (
       <div className="particles-component">
-        <canvas id={ this.props.id }></canvas>
+        <canvas id={this.props.id}></canvas>
       </div>
     );
   }
