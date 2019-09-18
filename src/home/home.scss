@@ -1,37 +1,45 @@
-@import "../index";
+@import "../variables.scss";
 
-$main-title-font: $title-font-family !default;
+$title-ffamily: $title-font-family !default;
+$subtitle-color: $pink !default;
+$title-color: $straw !default;
+$intro-fsize: $font-size-large !default;
 
 .home-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   height: 100%;
+  padding: 50px;
 
-  &__header {
-    position: absolute;
-    top: 100%/2;
+  &__content {
+    max-width: 500px;
+    text-align: center;
   }
 
   &__title,
   &__subtitle {
     text-align: center;
     text-transform: uppercase;
+    color: $title-color;
+    line-height: 1;
   }
 
   &__title {
     font-size: 9vw;
     text-transform: uppercase;
-    font-family: $main-title-font;
+    font-family: $title-ffamily;
   }
 
   &__subtitle {
     font-size: 3vw;
+    color: $subtitle-color;
+    margin-bottom: 15px;
   }
-}
 
-#particles-home {
-  display: block;
-  height: 100%;
+  &__intro {
+    margin: 15px 0;
+    font-size: $intro-fsize;
+  }
 }

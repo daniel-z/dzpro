@@ -1,38 +1,5 @@
-@import 'skeleton-scss/scss/skeleton.scss';
-
-// ----------------------
-// Variables
-// ----------------------
-
-// Color Palette
-$black: #0E0D0E;
-$white: #FFF;
-$light-blue: #DFDEE5;
-$gray: #866C76;
-$light-gray: #4E463F;
-$dark-gray: #36302E;
-
-
-// Font Families
-$bold-font-family: Teko, sans-serif;
-$light-font-family: Rajdhani, sans-serif;
-
-$title-font-family: $bold-font-family;
-$body-font-family: $light-font-family;
-
-// Font Colors
-$light-font-color: $light-blue;
-$medium-font-color: $gray;
-$dark-font-color: $black;
-
-// Font Sizes
-$font-size-xsmall: 8px;
-$font-size-small: 12px;
-$font-size-medium: 16px;
-$font-size-large: 18px;
-$font-size-xlarge: 22px;
-$font-size-xxlarge: 30px;
-$font-size-xxxlarge: 34px;
+@import "skeleton-scss/scss/skeleton.scss";
+@import "./variables.scss";
 
 // Headers
 h1,
@@ -84,5 +51,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $light-font-color;
-  background-color: $black;
+  background-color: $cod-gray;
 }
