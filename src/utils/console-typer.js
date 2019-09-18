@@ -1,9 +1,14 @@
 export default class ConsoleTyper {
   defaultSettings = {
-    loop: false,
+    loop: true,
     loopAfterSeconds: 6,
     cursor: "I",
-    stopCursorAfterBlinks: 50
+    stopCursorAfterBlinks: 10,
+    cursorAnimationSpeed: 500,
+    typingSpeed: 70,
+    onStartTyping: () => {},
+    onStopTyping: () => {},
+    onStopCursorAnimation: () => {}
   };
 
   state = {
@@ -18,7 +23,7 @@ export default class ConsoleTyper {
   };
 
   constructor(props) {
-    const { paragraphElement, loop, totalSeconds } = props;
+    const { paragraphElement } = props;
 
     if (!paragraphElement) {
       console.error(this.errorMessages.notParagraph);
@@ -35,13 +40,11 @@ export default class ConsoleTyper {
       console.error(this.errorMessages.notContent);
     }
 
-    this.settings = {
-      paragraphElement,
-      textToType,
-      loop,
-      totalSeconds,
-      ...this.defaultSettings
-    };
+    this.settings = Object.assign(
+      { ...this.defaultSettings },
+      { ...props },
+      { textToType }
+    );
 
     this.cleanParagraph();
 
@@ -54,7 +57,14 @@ export default class ConsoleTyper {
   }
 
   animateCursor(actualBlink) {
-    const { paragraphElement, cursor, stopCursorAfterBlinks } = this.settings;
+    const {
+      paragraphElement,
+      cursor,
+      stopCursorAfterBlinks,
+      cursorAnimationSpeed,
+      onStopCursorAnimation
+    } = this.settings;
+
     const actualText = paragraphElement.innerHTML.split("");
     const lastChar = actualText.pop();
     let newText = "";
@@ -63,6 +73,7 @@ export default class ConsoleTyper {
       newText = actualText.join("");
     } else {
       if (actualBlink >= stopCursorAfterBlinks) {
+        onStopCursorAnimation();
         return;
       }
       newText = paragraphElement.innerHTML + cursor;
@@ -70,11 +81,12 @@ export default class ConsoleTyper {
 
     setTimeout(() => {
       if (this.state.isTyping === true) {
+        onStopCursorAnimation();
         return;
       }
       paragraphElement.innerHTML = newText;
       this.animateCursor(actualBlink + 1);
-    }, 500);
+    }, cursorAnimationSpeed);
   }
 
   type(textArray) {
@@ -82,26 +94,45 @@ export default class ConsoleTyper {
       return;
     }
 
-    const { paragraphElement, cursor, loopAfterSeconds } = this.settings;
+    const {
+      paragraphElement,
+      cursor,
+      loop,
+      typingSpeed,
+      onStopTyping
+    } = this.settings;
+
     let actualText = paragraphElement.innerHTML.split("");
+    const newChar = textArray.shift();
+
     actualText.pop();
     actualText = actualText.join("");
-    const newChar = textArray.shift();
 
     this.settings.paragraphElement.innerHTML = actualText + newChar + cursor;
 
     if (textArray.length > 0) {
-      setTimeout(() => this.type(textArray), 50);
+      setTimeout(() => this.type(textArray), typingSpeed);
     } else {
       this.state.isTyping = false;
+
+      if (loop) {
+        this.programLoop();
+      }
+
+      onStopTyping();
       this.animateCursor(0);
-      setTimeout(() => this.startTyping(), loopAfterSeconds * 1000);
     }
   }
 
+  programLoop() {
+    const { loopAfterSeconds } = this.settings;
+    setTimeout(() => this.startTyping(), loopAfterSeconds * 1000);
+  }
+
   startTyping() {
-    const { textToType } = this.settings;
+    const { textToType, onStartTyping } = this.settings;
     this.state.isTyping = true;
+    onStartTyping();
     this.cleanParagraph();
     this.type(textToType.split(""));
   }

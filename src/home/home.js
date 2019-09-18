@@ -9,7 +9,10 @@ const Home = () => {
 
   useEffect(() => {
     consoleTyper.current = new ConsoleTyper({
-      paragraphElement: typerParagraph.current
+      paragraphElement: typerParagraph.current,
+      onStopTyping: () => {
+        console.log("stoped typing");
+      }
     });
     setTimeout(() => consoleTyper.current.startTyping(), 1000);
   });
@@ -25,8 +28,10 @@ const Home = () => {
         </div>
         <div className="row home-page__intro">
           <p className="six column home-page__intro-text" ref={typerParagraph}>
-            I code solutions and lead teams. I can work remotelly and I do my
-            best in every project. I learn every day. I like to share knowledge
+            {`{ `} I code software solutions and lead teams. {` }`}
+          </p>
+          <p>
+            I can work remotelly. I like to learn, experiment, share knowledge
             and teach.
           </p>
         </div>
