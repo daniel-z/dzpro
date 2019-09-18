@@ -41,5 +41,6 @@ $intro-fsize: $font-size-large !default;
   &__intro {
     margin: 15px 0;
     font-size: $intro-fsize;
+    text-align: justify;
   }
 }
