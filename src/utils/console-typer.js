@@ -4,8 +4,8 @@ export default class ConsoleTyper {
     loopAfterSeconds: 6,
     cursor: "I",
     stopCursorAfterBlinks: 10,
-    cursorAnimationSpeed: 500,
-    typingSpeed: 70,
+    cursorAnimationSpeedMs: 500,
+    typingSpeedMs: 70,
     onStartTyping: () => {},
     onStopTyping: () => {},
     onStopCursorAnimation: () => {}
@@ -53,7 +53,7 @@ export default class ConsoleTyper {
   }
 
   cleanParagraph() {
-    this.settings.paragraphElement.innerHTML = "";
+    this.settings.paragraphElement.innerHTML = "&nbsp;";
   }
 
   animateCursor(actualBlink) {
@@ -61,7 +61,7 @@ export default class ConsoleTyper {
       paragraphElement,
       cursor,
       stopCursorAfterBlinks,
-      cursorAnimationSpeed,
+      cursorAnimationSpeedMs,
       onStopCursorAnimation
     } = this.settings;
 
@@ -86,7 +86,7 @@ export default class ConsoleTyper {
       }
       paragraphElement.innerHTML = newText;
       this.animateCursor(actualBlink + 1);
-    }, cursorAnimationSpeed);
+    }, cursorAnimationSpeedMs);
   }
 
   type(textArray) {
@@ -98,7 +98,7 @@ export default class ConsoleTyper {
       paragraphElement,
       cursor,
       loop,
-      typingSpeed,
+      typingSpeedMs,
       onStopTyping
     } = this.settings;
 
@@ -111,7 +111,7 @@ export default class ConsoleTyper {
     this.settings.paragraphElement.innerHTML = actualText + newChar + cursor;
 
     if (textArray.length > 0) {
-      setTimeout(() => this.type(textArray), typingSpeed);
+      setTimeout(() => this.type(textArray), typingSpeedMs);
     } else {
       this.state.isTyping = false;
 
