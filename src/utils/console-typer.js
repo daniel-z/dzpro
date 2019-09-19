@@ -53,7 +53,24 @@ export default class ConsoleTyper {
   }
 
   cleanParagraph() {
-    this.settings.paragraphElement.innerHTML = "&nbsp;";
+    this.settings.paragraphElement.innerHTML = " ";
+  }
+
+  onStopCursorAnimation() {
+    const { onStopCursorAnimation } = this.settings;
+    onStopCursorAnimation();
+  }
+
+  onStartTyping() {
+    const { onStartTyping } = this.settings;
+    this.state.isTyping = true;
+    onStartTyping();
+  }
+
+  onStopTyping() {
+    const { onStopTyping } = this.settings;
+    this.state.isTyping = false;
+    onStopTyping();
   }
 
   animateCursor(actualBlink) {
@@ -61,8 +78,7 @@ export default class ConsoleTyper {
       paragraphElement,
       cursor,
       stopCursorAfterBlinks,
-      cursorAnimationSpeedMs,
-      onStopCursorAnimation
+      cursorAnimationSpeedMs
     } = this.settings;
 
     const actualText = paragraphElement.innerHTML.split("");
@@ -73,7 +89,7 @@ export default class ConsoleTyper {
       newText = actualText.join("");
     } else {
       if (actualBlink >= stopCursorAfterBlinks) {
-        onStopCursorAnimation();
+        this.onStopCursorAnimation();
         return;
       }
       newText = paragraphElement.innerHTML + cursor;
@@ -81,7 +97,7 @@ export default class ConsoleTyper {
 
     setTimeout(() => {
       if (this.state.isTyping === true) {
-        onStopCursorAnimation();
+        this.onStopCursorAnimation();
         return;
       }
       paragraphElement.innerHTML = newText;
@@ -94,13 +110,7 @@ export default class ConsoleTyper {
       return;
     }
 
-    const {
-      paragraphElement,
-      cursor,
-      loop,
-      typingSpeedMs,
-      onStopTyping
-    } = this.settings;
+    const { paragraphElement, cursor, loop, typingSpeedMs } = this.settings;
 
     let actualText = paragraphElement.innerHTML.split("");
     const newChar = textArray.shift();
@@ -113,13 +123,11 @@ export default class ConsoleTyper {
     if (textArray.length > 0) {
       setTimeout(() => this.type(textArray), typingSpeedMs);
     } else {
-      this.state.isTyping = false;
-
       if (loop) {
         this.programLoop();
       }
 
-      onStopTyping();
+      this.onStopTyping();
       this.animateCursor(0);
     }
   }
@@ -130,9 +138,8 @@ export default class ConsoleTyper {
   }
 
   startTyping() {
-    const { textToType, onStartTyping } = this.settings;
-    this.state.isTyping = true;
-    onStartTyping();
+    const { textToType } = this.settings;
+    this.onStartTyping();
     this.cleanParagraph();
     this.type(textToType.split(""));
   }

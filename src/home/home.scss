@@ -4,6 +4,7 @@ $title-ffamily: $title-font-family !default;
 $subtitle-color: $pink !default;
 $title-color: $straw !default;
 $intro-fsize: $font-size-large !default;
+$text-paragraph-bg-color: $black;
 
 .home-page {
   display: flex;
@@ -42,5 +43,17 @@ $intro-fsize: $font-size-large !default;
     margin: 15px 0;
     font-size: $intro-fsize;
     text-align: justify;
+  }
+
+  &__intro-text {
+    &:before {
+      content: "$:  ";
+      font-weight: 800;
+    }
+
+    min-width: 500px;
+    display: block;
+    background-color: $text-paragraph-bg-color;
+    padding: 30px;
   }
 }

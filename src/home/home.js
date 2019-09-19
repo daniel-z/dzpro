@@ -4,17 +4,16 @@ import ConsoleTyper from "../utils/console-typer";
 import "./home.scss";
 
 const Home = () => {
-  let typerParagraph = createRef();
-  let consoleTyper = createRef();
+  const typerParagraphFirst = createRef();
+  const consoleTyperFirst = createRef();
 
   useEffect(() => {
-    consoleTyper.current = new ConsoleTyper({
-      paragraphElement: typerParagraph.current,
-      onStopTyping: () => {
-        console.log("stoped typing");
-      }
+    consoleTyperFirst.current = new ConsoleTyper({
+      paragraphElement: typerParagraphFirst.current,
+      loop: true
     });
-    setTimeout(() => consoleTyper.current.startTyping(), 1000);
+
+    setTimeout(() => consoleTyperFirst.current.startTyping(), 1000);
   });
 
   return (
@@ -27,13 +26,12 @@ const Home = () => {
           </div>
         </div>
         <div className="row home-page__intro">
-          <p className="six column home-page__intro-text" ref={typerParagraph}>
-            {`{ `} I code software solutions and lead teams. {` }`}
-          </p>
-          <p>
-            I can work remotelly. I like to learn, experiment, share knowledge
-            and teach.
-          </p>
+          <div className="six column">
+            <p className="home-page__intro-text" ref={typerParagraphFirst}>
+              I code software solutions and lead teams. I work on-site or
+              remotelly. I like to learn, experiment, share and teach.
+            </p>
+          </div>
         </div>
       </div>
     </div>
