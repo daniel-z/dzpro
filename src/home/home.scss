@@ -7,14 +7,11 @@ $intro-fsize: $font-size-large !default;
 $text-paragraph-bg-color: $black;
 
 .home-page {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: 50px;
+  padding: 50px 10px;
 
   &__content {
-    max-width: 500px;
     text-align: center;
   }
 

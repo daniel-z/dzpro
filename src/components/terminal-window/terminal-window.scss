@@ -30,17 +30,8 @@ $light-gray: #999;
   min-width: 252px;
   overflow: hidden;
   display: block;
-  max-width: 498px;
   box-shadow: 1px 1px 20px $dark-gray;
   text-align: justify;
-
-  @media (min-width: 550px) {
-    min-width: 372px;
-  }
-
-  @media (min-width: 750px) {
-    min-width: 498px;
-  }
 
   &__header {
     background-color: $medium-gray;
