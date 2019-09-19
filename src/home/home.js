@@ -12,7 +12,7 @@ const Home = () => {
     consoleTyperFirst.current = new ConsoleTyper({
       paragraphElement: typerParagraphFirst.current,
       loop: true,
-      loopAfterSeconds: 1
+      loopAfterSeconds: 6
     });
 
     setTimeout(() => consoleTyperFirst.current.startTyping(), 1000);
