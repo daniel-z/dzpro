@@ -1,6 +1,7 @@
 import React, { useEffect, createRef } from "react";
 import ConsoleTyper from "../utils/console-typer";
 import TerminalWindow from "../components/terminal-window/terminal-window";
+import EditorWindow from "../components/editor-window/editor-window";
 
 import "./home.scss";
 
@@ -35,6 +36,11 @@ const Home = () => {
                 remotelly. I like to learn, experiment, share and teach.
               </p>
             </TerminalWindow>
+          </div>
+        </div>
+        <div className="row home-page__editor">
+          <div className="six column">
+            <EditorWindow title="Work Experience" />
           </div>
         </div>
       </div>

@@ -24,7 +24,8 @@ $light-gray: #999;
 /* Larger than Desktop HD */
 // @media (min-width: 1200px) {}
 
-.terminal-window {
+.editor-window {
+  text-align: justify;
   border-radius: 5px;
   border: 1px solid $light-gray;
   min-width: 252px;
@@ -32,7 +33,6 @@ $light-gray: #999;
   display: block;
   max-width: 498px;
   box-shadow: 1px 1px 20px $dark-gray;
-  text-align: justify;
 
   @media (min-width: 550px) {
     min-width: 372px;
@@ -47,6 +47,20 @@ $light-gray: #999;
     padding: 3px 7px;
     border-bottom: 1px solid $black;
     border-radius: 5px 5px 0 0;
+    position: relative;
+  }
+
+  &__buttons-bar {
+    width: 25%;
+    position: absolute;
+    top: 0;
+    text-align: left;
+    padding: 6px 0;
+  }
+
+  &__window-title {
+    width: 100%;
+    text-align: center;
   }
 
   &__header-button {
@@ -75,7 +89,7 @@ $light-gray: #999;
     width: 90%;
     display: block;
     min-height: 100px;
-    background-color: $black;
+    background-color: $dark-gray;
     padding: 5%;
   }
 }
