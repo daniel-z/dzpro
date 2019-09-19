@@ -1,5 +1,6 @@
 import React, { useEffect, createRef } from "react";
 import ConsoleTyper from "../utils/console-typer";
+import TerminalWindow from "../components/terminal-window/terminal-window";
 
 import "./home.scss";
 
@@ -10,7 +11,8 @@ const Home = () => {
   useEffect(() => {
     consoleTyperFirst.current = new ConsoleTyper({
       paragraphElement: typerParagraphFirst.current,
-      loop: true
+      loop: true,
+      loopAfterSeconds: 1
     });
 
     setTimeout(() => consoleTyperFirst.current.startTyping(), 1000);
@@ -27,10 +29,12 @@ const Home = () => {
         </div>
         <div className="row home-page__intro">
           <div className="six column">
-            <p className="home-page__intro-text" ref={typerParagraphFirst}>
-              I code software solutions and lead teams. I work on-site or
-              remotelly. I like to learn, experiment, share and teach.
-            </p>
+            <TerminalWindow>
+              <p className="home-page__intro-text" ref={typerParagraphFirst}>
+                I code software solutions and lead teams. I work on-site or
+                remotelly. I like to learn, experiment, share and teach.
+              </p>
+            </TerminalWindow>
           </div>
         </div>
       </div>
