@@ -1,11 +1,4 @@
-$black: #000;
-$white: #fff;
-$red: #fc5b57;
-$yellow: #e5bf3c;
-$green: #57c038;
-$dark-gray: #111;
-$medium-gray: #333;
-$light-gray: #999;
+@import "./variables.scss";
 
 /* Mobile first queries */
 
@@ -25,16 +18,17 @@ $light-gray: #999;
 // @media (min-width: 1200px) {}
 
 .editor-window {
+  position: relative;
   text-align: justify;
   border-radius: 5px;
-  border: 1px solid $light-gray;
+  border: 1px solid $gray-delta;
   min-width: 252px;
   overflow: hidden;
   display: block;
-  box-shadow: 1px 1px 20px $dark-gray;
+  box-shadow: 1px 1px 20px $gray-alpha;
 
   &__header {
-    background-color: $medium-gray;
+    background-color: $gray-gama;
     padding: 3px 7px;
     border-bottom: 1px solid $black;
     border-radius: 5px 5px 0 0;
@@ -61,7 +55,7 @@ $light-gray: #999;
     width: 15px;
     height: 15px;
     display: inline-block;
-    border: 1px solid $medium-gray;
+    border: 1px solid $gray-beta;
 
     &.close {
       background-color: $red;
@@ -77,10 +71,31 @@ $light-gray: #999;
   }
 
   &__body {
-    width: 90%;
+    width: 100%;
     display: block;
     min-height: 100px;
-    background-color: $dark-gray;
-    padding: 5%;
+    background-color: $gray-beta;
+    padding: $tab-height 0 0 0;
   }
+}
+
+.editor-content {
+  padding: 10px 25px 10px 30px;
+  display: flex;
+  background-color: $gray-alpha;
+  max-height: 366px;
+  overflow-y: scroll;
+
+  &__sidebar {
+    background-color: $gray-beta;
+  }
+}
+
+.editor-tab {
+  padding: 3px 25px;
+  border-radius: 5px 5px 0 0;
+  position: absolute;
+  top: $tab-height;
+  background-color: $gray-alpha;
+  box-shadow: 0 2px 2px $black;
 }

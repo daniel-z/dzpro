@@ -2,6 +2,7 @@ import React, { useEffect, createRef } from "react";
 import ConsoleTyper from "../utils/console-typer";
 import TerminalWindow from "../components/terminal-window/terminal-window";
 import EditorWindow from "../components/editor-window/editor-window";
+import JobExperience from "../components/job-experience/job-experience";
 
 import "./home.scss";
 
@@ -40,7 +41,9 @@ const Home = () => {
         </div>
         <div className="row home-page__editor">
           <div className="six column">
-            <EditorWindow title="Work Experience" />
+            <EditorWindow title="Daniel Zamorano" tabTitle="Work Experience">
+              <JobExperience />
+            </EditorWindow>
           </div>
         </div>
       </div>

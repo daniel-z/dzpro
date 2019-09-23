@@ -1,0 +1,44 @@
+$font-size-medium: 16px;
+$font-size-large: 18px;
+$font-size-xlarge: 22px;
+$pink: #ce9178;
+$straw: #d7ba7d;
+$havelock-blue: #569cd6;
+$gray: #866c76;
+@import "../../variables.scss";
+
+.job {
+  &__title {
+    font-size: $font-size-xxlarge;
+    margin: 10px 0 0 0;
+    line-height: 1;
+    color: $straw;
+  }
+
+  &__company {
+    color: $pink;
+    font-size: $font-size-large;
+    margin: 5px 0 20px 0;
+    line-height: 1;
+    display: block;
+  }
+
+  &__description {
+    font-size: $font-size-medium;
+    text-align: justify;
+    margin-bottom: 10px;
+  }
+
+  &__keywords {
+    margin-bottom: 40px;
+
+    span {
+      border-radius: 5px;
+      padding: 3px 6px;
+      background-color: $cod-gray;
+      color: $white;
+      margin: 3.5px 7px 3.5px 0;
+      display: inline-block;
+    }
+  }
+}

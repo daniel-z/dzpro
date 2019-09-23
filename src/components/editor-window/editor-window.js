@@ -1,8 +1,7 @@
 import React from "react";
 import "./editor-window.scss";
-import EditorTab from "./editor-tab/editor-tab";
 
-const EditorWindow = ({ title, children }) => (
+const EditorWindow = ({ title, tabTitle, children }) => (
   <section className="editor-window">
     <div className="editor-window__header">
       <div className="editor-window__window-title">
@@ -14,7 +13,10 @@ const EditorWindow = ({ title, children }) => (
         </div>
       </div>
     </div>
-    <div className="editor-window__body"></div>
+    <section className="editor-tab">{tabTitle}</section>
+    <div className="editor-window__body">
+      <section className="editor-content">{children}</section>
+    </div>
   </section>
 );
 

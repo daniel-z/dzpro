@@ -51,6 +51,8 @@ $text-paragraph-bg-color: $black;
   }
 
   &__intro-text {
+    margin-bottom: 10px;
+
     &:before {
       content: "$:  ";
       font-weight: 800;
