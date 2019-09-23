@@ -9,7 +9,7 @@ $text-paragraph-bg-color: $black;
 .home-page {
   align-items: center;
   height: 100%;
-  padding: 50px 10px;
+  padding: 10px;
 
   &__content {
     text-align: center;
@@ -52,6 +52,7 @@ $text-paragraph-bg-color: $black;
 
   &__intro-text {
     margin-bottom: 10px;
+    min-height: 56px;
 
     &:before {
       content: "$:  ";
