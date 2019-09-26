@@ -1,0 +1,61 @@
+@import "../../variables";
+
+$title-ffamily: $title-font-family !default;
+$subtitle-color: $pink !default;
+$title-color: $straw !default;
+$intro-fsize: $font-size-large !default;
+$text-paragraph-bg-color: $black;
+
+.cv-page {
+  align-items: center;
+  padding: 30px 10px 10px 10px;
+
+  &__content {
+    text-align: center;
+  }
+
+  &__title,
+  &__subtitle {
+    text-align: center;
+    text-transform: uppercase;
+    color: $title-color;
+    line-height: 1;
+  }
+
+  &__title {
+    font-size: 9vw;
+    text-transform: uppercase;
+    font-family: $title-ffamily;
+
+    /* Larger than tablet */
+    @media (min-width: 750px) {
+      font-size: 75px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 3vw;
+    color: $subtitle-color;
+    margin-bottom: 15px;
+
+    @media (min-width: 750px) {
+      font-size: 33px;
+    }
+  }
+
+  &__intro {
+    margin: 15px 0;
+    font-size: $intro-fsize;
+    text-align: justify;
+  }
+
+  &__intro-text {
+    margin-bottom: 10px;
+    min-height: 56px;
+
+    &:before {
+      content: "$:  ";
+      font-weight: 800;
+    }
+  }
+}

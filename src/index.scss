@@ -1,6 +1,8 @@
 @import "skeleton-scss/scss/skeleton.scss";
 @import "./variables.scss";
 
+$link-fcolor: $havelock-blue;
+
 // Headers
 h1,
 h2,
@@ -39,6 +41,10 @@ h5 {
 h6 {
   font-size: $font-size-small;
   font-weight: normal;
+}
+
+a {
+  color: $link-fcolor;
 }
 
 /* Mobile first queries */
