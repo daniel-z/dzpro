@@ -33,8 +33,8 @@ const Home = () => {
           <div className="six column">
             <TerminalWindow>
               <p className="home-page__intro-text" ref={typerParagraphFirst}>
-                I code software solutions and lead teams. I work on-site or
-                remotelly. I like to learn, experiment, share and teach.
+                I code software solutions for the web and lead teams. I work on-site or
+                remotely. I like to learn, experiment, share and teach.
               </p>
             </TerminalWindow>
           </div>

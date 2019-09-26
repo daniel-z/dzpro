@@ -80,10 +80,9 @@
 }
 
 .editor-content {
-  padding: 10px 25px 10px 30px;
+  padding: 30px 25px 10px 30px;
   display: flex;
   background-color: $gray-alpha;
-  max-height: 366px;
   overflow-y: scroll;
 
   &__sidebar {
@@ -97,5 +96,5 @@
   position: absolute;
   top: $tab-height;
   background-color: $gray-alpha;
-  box-shadow: 0 2px 2px $black;
+  box-shadow: -3px 1px 5px $black;
 }

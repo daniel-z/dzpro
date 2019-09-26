@@ -8,6 +8,8 @@ $gray: #866c76;
 @import "../../variables.scss";
 
 .job {
+  padding: 10px 25px;
+
   &__title {
     font-size: $font-size-xxlarge;
     margin: 10px 0 0 0;
