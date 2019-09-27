@@ -7,23 +7,6 @@ $dark-gray: #111;
 $medium-gray: #333;
 $light-gray: #999;
 
-/* Mobile first queries */
-
-/* Larger than mobile */
-// @media (min-width: 400px) {}
-
-/* Larger than phablet */
-// @media (min-width: 550px) {}
-
-/* Larger than tablet */
-// @media (min-width: 750px) {}
-
-/* Larger than desktop */
-// @media (min-width: 1000px) {}
-
-/* Larger than Desktop HD */
-// @media (min-width: 1200px) {}
-
 .terminal-window {
   border-radius: 5px;
   border: 1px solid $light-gray;

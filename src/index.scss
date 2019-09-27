@@ -1,5 +1,6 @@
 @import "skeleton-scss/scss/skeleton.scss";
 @import "./variables.scss";
+@import "./media-queries.scss";
 
 $link-fcolor: $havelock-blue;
 
@@ -47,23 +48,6 @@ a {
   color: $link-fcolor;
 }
 
-/* Mobile first queries */
-
-/* Larger than mobile */
-// @media (min-width: 400px) {}
-
-/* Larger than phablet */
-// @media (min-width: 550px) {}
-
-/* Larger than tablet */
-// @media (min-width: 750px) {}
-
-/* Larger than desktop */
-// @media (min-width: 1000px) {}
-
-/* Larger than Desktop HD */
-// @media (min-width: 1200px) {}
-
 html,
 body {
   height: 100vh;
@@ -75,4 +59,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: $light-font-color;
   background-color: $cod-gray;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+}
+
+.btn {
+  color: $white;
+  font-size: $font-size-small;
+
+  &:hover {
+    color: $white;
+  }
 }

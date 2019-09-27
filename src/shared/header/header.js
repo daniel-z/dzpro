@@ -4,9 +4,9 @@ import './header.scss';
 export default () => (
   <header className="app-header">
     <nav className="nav">
-      <a className="nav__link" href={'/'}><b>01.</b> HOME</a>
-      <a className="nav__link" href={'/cv'}><b>02.</b> CV</a>
-      <a className="nav__link" href={'/lab'}><b>03.</b> LAB</a>
+      <a className="nav__link" href={'/'}><b>01.</b> About</a>
+      <a className="nav__link" href={'/'}><b>02.</b> Experience</a>
+      <a className="nav__link" href={'/'}><b>03.</b> Coding Garage</a>
     </nav>
   </header>
 );

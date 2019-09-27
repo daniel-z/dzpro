@@ -1,22 +1,46 @@
 @import "../../variables";
+@import "../../media-queries.scss";
 
 $title-ffamily: $title-font-family !default;
 $subtitle-color: $pink !default;
 $title-color: $straw !default;
 $intro-fsize: $font-size-xlarge !default;
 $text-paragraph-bg-color: $black;
+$title3-ffamily: $light-font-family !default;
+
+$section-title-ffamily: $light-font-family !default;
+$section-title-fcolor: $straw !default;
+$section-title-fsize: $font-size-xlarge !default;
+$section-content-fsize: $font-size-large !default;
+
+$page-padding-left: 3%;
+$page-padding-right: 20%;
+$page-total-padding: calc(#{$page-padding-left} + #{$page-padding-right});
+$page-width: calc(100% - #{$page-total-padding});
+
+$page-padding-right-large: 30%;
+$page-padding-left-large: 3%;
+$page-total-padding-large: calc(#{$page-padding-left-large} + #{$page-padding-right-large});
+$page-width-large: calc(100% - #{$page-total-padding-large});
 
 .home-page {
   align-items: center;
-  padding: 100px 10px 10px 10px;
+  padding-top: 150px;
+  padding-left: $page-padding-left;
+  width: $page-width;
+  margin-bottom: 50px;
 
-  @media (min-width: 750px) {
-    width: 80%;
+  @include small-up {
+    width: $page-width;
   }
 
-   @media (min-width: 1000px) {
-     width: 80%;
-   }
+  @include medium-up {
+    width: $page-width-large;
+  }
+
+  @include large-up {
+    width: $page-width-large;
+  }
 
   &__content {
     text-align: center;
@@ -27,48 +51,123 @@ $text-paragraph-bg-color: $black;
     text-align: left;
     text-transform: uppercase;
     color: $title-color;
-    line-height: 1;
+    line-height: 0.8;
   }
 
   &__title {
-    font-size: 9vw;
     text-transform: uppercase;
     font-family: $title-ffamily;
     text-align: justify;
+    font-size: 18vw;
 
-    /* Larger than tablet */
-    @media (min-width: 750px) {
-      font-size: 11vw;
+    @include medium-up {
+      font-size: 15vw;
     }
 
-    @media (min-width: 1000px) {
+    @include large-up {
       font-size: 12vw;
+    }
+
+    @include xlarge-up {
+      font-size: 180px;
     }
   }
 
   &__subtitle {
-    font-size: 3vw;
     color: $subtitle-color;
     margin-bottom: 15px;
+    font-size: 6vw;
 
-    @media (min-width: 750px) {
-      font-size: 33px;
+    @include medium-up {
+      font-size: 5vw;
+    }
+
+    @include large-up {
+      font-size: 5vw;
+      margin-top: 10px;
+    }
+
+    @include xlarge-up {
+      font-size: 50px;
+      margin-top: 0;
     }
   }
 
   &__intro {
-    margin: 15px 0;
+    margin: 45px 0 50px 0;
     font-size: $intro-fsize;
     text-align: justify;
+    margin-bottom: 500px;
   }
 
   &__intro-text {
     margin-bottom: 10px;
     min-height: 56px;
+    font-size: 5vw;
+    line-height: 1.2;
 
     &:before {
-      content: "$:  ";
+      content: "$:   ";
       font-weight: 800;
+    }
+
+    @include xsmall-up {
+      font-size: 4.5vw;
+      line-height: 1.2;
+    }
+
+    @include small-up {
+      font-size: 4vw;
+    }
+
+    @include medium-up {
+      font-size: 3vw;
+    }
+
+    @include large-up {
+      font-size: 2.5vw;
+      margin-top: 40px;
+    }
+
+    @include xlarge-up {
+      font-size: 35px;
+    }
+  }
+
+  &__profesional-experience {
+    text-align: justify;
+
+    h3 {
+      font-family: $section-title-ffamily;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-size: $section-title-fsize;
+      color: $section-title-fcolor;
+
+      @include medium-up {
+        font-size: 3vw;
+      }
+
+      @include xlarge-up {
+        font-size: 35px;
+      }
+    }
+
+    p {
+      font-size: $section-content-fsize;
+      line-height: 1.2;
+
+      @include medium-up {
+        font-size: 2.5vw;
+      }
+
+      @include large-up {
+        font-size: 2.5vw;
+      }
+
+      @include xlarge-up {
+        font-size: 30px;
+      }
     }
   }
 }
