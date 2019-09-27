@@ -20,7 +20,9 @@ $page-width: calc(100% - #{$page-total-padding});
 
 $page-padding-right-large: 30%;
 $page-padding-left-large: 3%;
-$page-total-padding-large: calc(#{$page-padding-left-large} + #{$page-padding-right-large});
+$page-total-padding-large: calc(
+  #{$page-padding-left-large} + #{$page-padding-right-large}
+);
 $page-width-large: calc(100% - #{$page-total-padding-large});
 
 .home-page {
@@ -44,6 +46,10 @@ $page-width-large: calc(100% - #{$page-total-padding-large});
 
   &__content {
     text-align: center;
+  }
+
+  section {
+    padding-bottom: 60px;
   }
 
   &__title,

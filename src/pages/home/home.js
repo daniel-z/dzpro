@@ -17,7 +17,6 @@ const Home = () => {
       <div className="home-page__content">
         <div className="row">
           <div className="six column">
-
             <section className="home-page__about" id="about">
               <div className="home-page__header">
                 <h1 className="home-page__title">
