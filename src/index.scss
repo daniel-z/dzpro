@@ -69,8 +69,14 @@ body {
 .btn {
   color: $white;
   font-size: $font-size-small;
+  border: 1px solid $gray;
+  border-radius: 5px;
+  padding: 5px 12px;
+  text-decoration: none;
+  color: $white;
 
   &:hover {
-    color: $white;
+    background-color: $white;
+    color: $black;
   }
 }

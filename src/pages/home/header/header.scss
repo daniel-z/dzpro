@@ -1,0 +1,24 @@
+@import "../../variables";
+$link-fcolor: $havelock-blue !default;
+
+.app-header {
+  position: absolute;
+  top: 0;
+
+  .local-nav {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+
+    &__link {
+      padding: 10px 0;
+      margin-right: 30px;
+      text-decoration: none;
+
+      b {
+        font-weight: normal;
+        color: $white;
+      }
+    }
+  }
+}
