@@ -43,4 +43,9 @@ $gray: #866c76;
       display: inline-block;
     }
   }
+
+  &__project-name {
+    color: $pink;
+    font-size: $font-size-medium;
+  }
 }
