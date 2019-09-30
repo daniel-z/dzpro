@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './header.scss';
+import './home-header.scss';
 
 function scrollTo(ev) {
   ev.preventDefault();
@@ -27,7 +27,7 @@ export default() => {
   }, []);
 
   return (
-    <header className="app-header">
+    <header className="home-header">
       <nav className="local-nav">
         <a className="local-nav__link" href={'#about'}>
           <b>01.</b>

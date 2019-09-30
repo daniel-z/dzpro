@@ -1,5 +1,6 @@
 import React, {useEffect, createRef} from "react";
 import ConsoleTyper from "../../utils/console-typer";
+import HomeHeader from './home-header/home-header';
 
 import "./home.scss";
 
@@ -14,6 +15,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      <HomeHeader/>
       <div className="home-page__content">
         <section className="home-page__about" id="about">
           <div className="home-page__header">
