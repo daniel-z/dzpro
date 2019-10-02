@@ -1,28 +1,13 @@
 import React, {useEffect} from 'react';
 import './local-nav.scss';
-
-function scrollTo(ev) {
-  ev.preventDefault();
-  const target = ev.target;
-  if (target && target.attributes && target.attributes.href && target.attributes.href.nodeValue) {
-    const toElementId = target
-      .attributes
-      .href
-      .nodeValue
-      .slice(1);
-    const toElement = document.getElementById(toElementId);
-    if (toElement) {
-      toElement.scrollIntoView({block: 'start', behavior: 'smooth'});
-    }
-  }
-}
+import {anchorScrollToId} from '../../../utils/utils';
 
 export default() => {
   useEffect(() => {
     const links = new Array(...document.getElementsByClassName("local-nav__link"));
 
     links.forEach(link => {
-      link.addEventListener('click', scrollTo);
+      link.addEventListener('click', anchorScrollToId);
     });
   }, []);
 

@@ -3,6 +3,7 @@ import ConsoleTyper from "../../utils/console-typer";
 import LocalNav from './local-nav/local-nav';
 import {ROUTES} from "../../constants";
 import {Link} from 'react-router-dom';
+import {scrollToClass} from "../../utils/utils";
 
 import "./home.scss";
 
@@ -12,11 +13,16 @@ const Home = () => {
 
   useEffect(() => {
     consoleTyper.current = new ConsoleTyper({paragraphElement: typerParagraph.current, loop: false, typingSpeedMs: 40, stopCursorAfterBlinks: 200});
-    setTimeout(() => consoleTyper.current.startTyping(), 1000);
+    setTimeout(() => {
+      consoleTyper
+        .current
+        .startTyping();
+      scrollToClass('page');
+    }, 200);
   }, [consoleTyper, typerParagraph]);
 
   return (
-    <div className="home-page">
+    <div className="home-page page">
       <LocalNav/>
       <div className="home-page__content">
         <section className="home-page__about" id="about">

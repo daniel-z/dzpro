@@ -4,6 +4,7 @@ import TerminalWindow from "../../components/terminal-window/terminal-window";
 import EditorWindow from "../../components/editor-window/editor-window";
 import JobExperience from "../../components/job-experience/job-experience";
 import {ROUTES} from "../../constants";
+import {scrollToClass} from "../../utils/utils";
 
 import "./experience.scss";
 
@@ -14,7 +15,12 @@ const Experience = () => {
   useEffect(() => {
     consoleTyperFirst.current = new ConsoleTyper({paragraphElement: typerParagraphFirst.current, loop: true, loopAfterSeconds: 6});
 
-    setTimeout(() => consoleTyperFirst.current.startTyping(), 1000);
+    setTimeout(() => {
+      consoleTyperFirst
+        .current
+        .startTyping();
+      scrollToClass('page');
+    }, 200);
 
     document
       .getElementById('header')
@@ -26,7 +32,7 @@ const Experience = () => {
   });
 
   return (
-    <div className="experience-page">
+    <div className="experience-page page">
       <div className="experience-page__content">
         <div className="experience-page__header" id="header">
           <h1 className="experience-page__title">
