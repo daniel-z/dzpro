@@ -7,7 +7,7 @@ import {ROUTES} from "../../constants";
 
 import "./experience.scss";
 
-const CV = () => {
+const Experience = () => {
   const typerParagraphFirst = createRef();
   const consoleTyperFirst = createRef();
 
@@ -54,4 +54,4 @@ const CV = () => {
   );
 };
 
-export default CV;
+export default Experience;

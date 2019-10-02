@@ -3,7 +3,7 @@ import {BrowserRouter as HashRouter, Route} from "react-router-dom";
 import Home from "./pages/home/home";
 import WIP from "./pages/wip/wip";
 import MainLayout from "./layouts/main-layout";
-import Experience from "./pages/cv/experience";
+import Experience from "./pages/experience/experience";
 import {ROUTES} from "./constants";
 
 import "./App.scss";
