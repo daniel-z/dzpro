@@ -2,6 +2,7 @@ import React, {useEffect, createRef} from "react";
 import ConsoleTyper from "../../utils/console-typer";
 import LocalNav from './local-nav/local-nav';
 import {ROUTES} from "../../constants";
+import {Link} from 'react-router-dom';
 
 import "./home.scss";
 
@@ -47,9 +48,9 @@ const Home = () => {
             international teams and modern technologies, from different sides: backend,
             frontend and design.
           </p>
-          <a className="btn primary" href={ROUTES.EXPERIENCE}>
+          <Link className="btn primary" to={ROUTES.EXPERIENCE}>
             See More
-          </a>
+          </Link>
         </section>
 
         <section className="home-page__code-experiments" id="code-experiments">
@@ -60,9 +61,9 @@ const Home = () => {
             Different code experiments, nothing impressive but more about learning new
             technologies.
           </p>
-          <a className="btn primary" href={ROUTES.CODE}>
+          <Link className="btn primary" to={ROUTES.CODE}>
             See More
-          </a>
+          </Link>
         </section>
       </div>
     </div>

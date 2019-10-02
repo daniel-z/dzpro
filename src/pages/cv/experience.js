@@ -4,6 +4,7 @@ import TerminalWindow from "../../components/terminal-window/terminal-window";
 import EditorWindow from "../../components/editor-window/editor-window";
 import JobExperience from "../../components/job-experience/job-experience";
 import {ROUTES} from "../../constants";
+import {Link} from 'react-router-dom';
 
 import "./experience.scss";
 
@@ -20,7 +21,7 @@ const CV = () => {
       .getElementById('header')
       .addEventListener('click', ev => {
         ev.preventDefault();
-        window.location.href = ROUTES.HOME;
+        window.location.href = `#${ROUTES.HOME}`;
       })
 
   });
