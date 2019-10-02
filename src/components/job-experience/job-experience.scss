@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 $font-size-medium: 16px;
 $font-size-large: 18px;
 $font-size-xlarge: 22px;
@@ -5,13 +7,12 @@ $pink: #ce9178;
 $straw: #d7ba7d;
 $havelock-blue: #569cd6;
 $gray: #866c76;
-@import "../../variables.scss";
 
 .job {
   padding: 10px 25px;
 
   &__title {
-    font-size: $font-size-xxlarge;
+    font-size: $font-size-xlarge;
     margin: 10px 0 0 0;
     line-height: 1;
     color: $straw;

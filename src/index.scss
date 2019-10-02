@@ -17,6 +17,18 @@ h6 {
   color: $light-font-color;
 }
 
+h1,
+h2 {
+  font-family: $bold-font-family;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: $light-font-family;
+}
+
 h1 {
   font-size: $font-size-xxxlarge;
 }

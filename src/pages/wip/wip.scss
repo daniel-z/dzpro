@@ -1,0 +1,61 @@
+@import "../../variables";
+@import "../../media-queries.scss";
+
+$title-tcolor: $pink !default;
+$link-fsize: $font-size-large;
+$title-fsize: $font-size-xxxlarge;
+
+.wip-page {
+  padding: 50px 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+
+  img {
+    opacity: 0.8;
+    height: 80%;
+    width: 80%;
+    background-image: url("https://media.giphy.com/media/pVkmGyqYRt4qY/source.gif");
+    background-size: cover;
+    background-position: center;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-weight: normal;
+    color: $title-tcolor;
+    line-height: 1;
+    margin: 20px 0;
+    font-size: $title-fsize;
+  }
+
+  a {
+    font-size: $link-fsize;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-transform: uppercase;
+  }
+
+  &__gif {
+    opacity: 0.8;
+    margin: 30px auto;
+    display: block;
+    background-image: url("https://media.giphy.com/media/pVkmGyqYRt4qY/source.gif");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    width: 90vw;
+    max-width: 772px;
+
+    @include medium-up {
+      height: 60vh;
+      width: 80vw;
+    }
+
+    @include large-up {
+      height: 70vh;
+      width: 70vw;
+    }
+  }
+}
