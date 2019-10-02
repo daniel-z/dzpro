@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     consoleTyper.current = new ConsoleTyper({paragraphElement: typerParagraph.current, loop: false, typingSpeedMs: 40, stopCursorAfterBlinks: 200});
     setTimeout(() => consoleTyper.current.startTyping(), 1000);
-  }, []);
+  }, [consoleTyper, typerParagraph]);
 
   return (
     <div className="home-page">
