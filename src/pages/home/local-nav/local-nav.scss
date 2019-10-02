@@ -1,0 +1,24 @@
+@import "../../../variables";
+$link-fcolor: $havelock-blue !default;
+$nav-bg-color: $cod-gray !default;
+
+.local-nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: $nav-bg-color;
+
+  &__link {
+    padding: 10px 0;
+    margin-right: 30px;
+    text-decoration: none;
+
+    b {
+      font-weight: normal;
+      color: $white;
+    }
+  }
+}

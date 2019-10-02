@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './home-header.scss';
+import './local-nav.scss';
 
 function scrollTo(ev) {
   ev.preventDefault();
@@ -27,18 +27,16 @@ export default() => {
   }, []);
 
   return (
-    <header className="home-header">
-      <nav className="local-nav">
-        <a className="local-nav__link" href={'#about'}>
-          <b>01.</b>
-          About</a>
-        <a className="local-nav__link" href={'#experience'}>
-          <b>02.</b>
-          Experience</a>
-        <a className="local-nav__link" href={'#coding-garage'}>
-          <b>03.</b>
-          Coding Garage</a>
-      </nav>
-    </header>
+    <nav className="local-nav">
+      <a className="local-nav__link" href={'#about'}>
+        <b>01.</b>
+        About</a>
+      <a className="local-nav__link" href={'#experience'}>
+        <b>02.</b>
+        Experience</a>
+      <a className="local-nav__link" href={'#code-experiments'}>
+        <b>03.</b>
+        Code Experiments</a>
+    </nav>
   )
 };

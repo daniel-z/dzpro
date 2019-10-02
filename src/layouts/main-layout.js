@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './main-layout.scss';
 import Footer from '../shared/footer/footer';
 
 export default(props) => (
-  <div className='container'>
+  <Fragment>
     {props.children}
     <Footer/>
-  </div>
+  </Fragment>
 );

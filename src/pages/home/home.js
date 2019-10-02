@@ -1,6 +1,6 @@
 import React, {useEffect, createRef} from "react";
 import ConsoleTyper from "../../utils/console-typer";
-import HomeHeader from './home-header/home-header';
+import LocalNav from './local-nav/local-nav';
 
 import "./home.scss";
 
@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <HomeHeader/>
+      <LocalNav/>
       <div className="home-page__content">
         <section className="home-page__about" id="about">
           <div className="home-page__header">
@@ -26,7 +26,9 @@ const Home = () => {
               Software Engineer
             </h4>
           </div>
-
+          <p>
+            <a href="mailto:daniel.zamorano.m@gmail.com">daniel.zamorano.m@gmail.com</a>
+          </p>
           <div className="home-page__intro">
             <p className="home-page__intro-text" ref={typerParagraph}>
               I code software solutions for the web and lead teams. I work on-site or
@@ -35,7 +37,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="home-page__profesional-experience" id="experience">
+        <section className="home-page__professional-experience" id="experience">
           <h3>
             Professional Experience
           </h3>
@@ -45,6 +47,19 @@ const Home = () => {
             frontend and design.
           </p>
           <a className="btn" href="/cv">
+            See More
+          </a>
+        </section>
+
+        <section className="home-page__code-experiments" id="code-experiments">
+          <h3>
+            Code Experiments
+          </h3>
+          <p>
+            Different code experiments, nothing impressive but more about learning new
+            technologies.
+          </p>
+          <a className="btn" href="/code-experiments">
             See More
           </a>
         </section>

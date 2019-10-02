@@ -49,7 +49,52 @@ $page-width-large: calc(100% - #{$page-total-padding-large});
   }
 
   section {
+    text-align: justify;
+
+    h3 {
+      font-family: $section-title-ffamily;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-size: $section-title-fsize;
+      color: $section-title-fcolor;
+
+      @include medium-up {
+        font-size: 3vw;
+      }
+
+      @include xlarge-up {
+        font-size: 35px;
+      }
+    }
+
+    p {
+      font-size: $section-content-fsize;
+      line-height: 1.2;
+
+      @include medium-up {
+        font-size: 2.5vw;
+      }
+
+      @include large-up {
+        font-size: 2.5vw;
+      }
+
+      @include xlarge-up {
+        font-size: 30px;
+      }
+    }
+  }
+
+  &__about {
+    padding-top: 100px;
+    padding-bottom: 100px;
     padding-bottom: 60px;
+  }
+
+  &__professional-experience,
+  &__code-experiments {
+    padding-top: 200px;
+    padding-bottom: 500px;
   }
 
   &__title,
@@ -137,43 +182,6 @@ $page-width-large: calc(100% - #{$page-total-padding-large});
 
     @include xlarge-up {
       font-size: 35px;
-    }
-  }
-
-  &__profesional-experience {
-    text-align: justify;
-
-    h3 {
-      font-family: $section-title-ffamily;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      font-size: $section-title-fsize;
-      color: $section-title-fcolor;
-
-      @include medium-up {
-        font-size: 3vw;
-      }
-
-      @include xlarge-up {
-        font-size: 35px;
-      }
-    }
-
-    p {
-      font-size: $section-content-fsize;
-      line-height: 1.2;
-
-      @include medium-up {
-        font-size: 2.5vw;
-      }
-
-      @include large-up {
-        font-size: 2.5vw;
-      }
-
-      @include xlarge-up {
-        font-size: 30px;
-      }
     }
   }
 }
