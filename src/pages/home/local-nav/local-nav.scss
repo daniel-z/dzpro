@@ -1,6 +1,8 @@
 @import "../../../variables";
-$link-fcolor: $havelock-blue !default;
+
 $nav-bg-color: $cod-gray !default;
+$link-fcolor: $havelock-blue !default;
+$link-fsize: $font-size-large !default;
 
 .local-nav {
   position: fixed;
@@ -15,6 +17,7 @@ $nav-bg-color: $cod-gray !default;
     padding: 10px 0;
     margin-right: 30px;
     text-decoration: none;
+    font-size: $link-fsize;
 
     b {
       font-weight: normal;

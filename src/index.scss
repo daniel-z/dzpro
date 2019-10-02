@@ -46,6 +46,11 @@ h6 {
 
 a {
   color: $link-fcolor;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 html,
@@ -68,15 +73,25 @@ body {
 
 .btn {
   color: $white;
-  font-size: $font-size-small;
+  font-size: $font-size-medium;
   border: 1px solid $gray;
   border-radius: 5px;
   padding: 5px 12px;
   text-decoration: none;
-  color: $white;
+  text-shadow: none;
 
   &:hover {
     background-color: $white;
     color: $black;
+  }
+
+  &.primary {
+    color: $straw;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
   }
 }

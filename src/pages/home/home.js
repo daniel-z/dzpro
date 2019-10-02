@@ -46,7 +46,7 @@ const Home = () => {
             international teams and modern technologies, from different sides: backend,
             frontend and design.
           </p>
-          <a className="btn" href="/cv">
+          <a className="btn primary" href="/cv">
             See More
           </a>
         </section>
@@ -59,7 +59,7 @@ const Home = () => {
             Different code experiments, nothing impressive but more about learning new
             technologies.
           </p>
-          <a className="btn" href="/code-experiments">
+          <a className="btn primary" href="/code-experiments">
             See More
           </a>
         </section>
