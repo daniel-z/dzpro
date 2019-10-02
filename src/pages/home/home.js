@@ -1,6 +1,7 @@
 import React, {useEffect, createRef} from "react";
 import ConsoleTyper from "../../utils/console-typer";
 import LocalNav from './local-nav/local-nav';
+import {ROUTES} from "../../constants";
 
 import "./home.scss";
 
@@ -46,7 +47,7 @@ const Home = () => {
             international teams and modern technologies, from different sides: backend,
             frontend and design.
           </p>
-          <a className="btn primary" href="/cv">
+          <a className="btn primary" href={ROUTES.EXPERIENCE}>
             See More
           </a>
         </section>
@@ -59,7 +60,7 @@ const Home = () => {
             Different code experiments, nothing impressive but more about learning new
             technologies.
           </p>
-          <a className="btn primary" href="/code-experiments">
+          <a className="btn primary" href={ROUTES.CODE}>
             See More
           </a>
         </section>
