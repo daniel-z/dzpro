@@ -18,7 +18,7 @@ $page-padding-right: 20%;
 $page-total-padding: calc(#{$page-padding-left} + #{$page-padding-right});
 $page-width: calc(100% - #{$page-total-padding});
 
-$page-padding-right-large: 30%;
+$page-padding-right-large: 50%;
 $page-padding-left-large: 3%;
 $page-total-padding-large: calc(
   #{$page-padding-left-large} + #{$page-padding-right-large}
@@ -62,8 +62,8 @@ $page-width-large: calc(100% - #{$page-total-padding-large});
         font-size: 3vw;
       }
 
-      @include xlarge-up {
-        font-size: 35px;
+      @include large-up {
+        font-size: 28px;
       }
     }
 
@@ -76,11 +76,7 @@ $page-width-large: calc(100% - #{$page-total-padding-large});
       }
 
       @include large-up {
-        font-size: 2.5vw;
-      }
-
-      @include xlarge-up {
-        font-size: 30px;
+        font-size: 25px;
       }
     }
   }
