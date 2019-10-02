@@ -1,13 +1,13 @@
-import React from "react";
+import React, {Fragment} from "react";
 import JobExperienceData from "../../data/job-experience";
 import "./job-experience.scss";
 
-const Projects = ({projects}) => {
-  return (projects.map((project) => (
-    <div>
+const Projects = ({projects, company}) => {
+  return (projects.map((project, idx) => (
+    <Fragment key={`${company}-project-${idx}`}>
       <span className="job__project-name">{project.name}</span>
       <p>{project.description}</p>
-    </div>
+    </Fragment>
   )));
 };
 
@@ -28,12 +28,11 @@ const JobExperienceElement = ({
       </span>
       <p className="job__description">{description}</p>
 
-      {projects && projects.length > 0 && <Projects projects={projects}/>}
+      {projects && projects.length > 0 && <Projects company={company} projects={projects}/>}
 
       <p className="job__keywords">
         {keywords.map((word, idx) => (
-          <span key={`keyword-${idx}`}>{word + ", "}
-          </span>
+          <span key={`keyword-${idx}`}>{word + ", "}</span>
         ))}
       </p>
     </div>

@@ -12,7 +12,7 @@ function scrollTo(ev) {
       .slice(1);
     const toElement = document.getElementById(toElementId);
     if (toElement) {
-      toElement.scrollIntoView({block: 'end', behavior: 'smooth'});
+      toElement.scrollIntoView({block: 'start', behavior: 'smooth'});
     }
   }
 }
