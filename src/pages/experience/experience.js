@@ -13,7 +13,11 @@ const Experience = () => {
   const consoleTyperFirst = createRef();
 
   useEffect(() => {
-    consoleTyperFirst.current = new ConsoleTyper({paragraphElement: typerParagraphFirst.current, loop: true, loopAfterSeconds: 6});
+    consoleTyperFirst.current = new ConsoleTyper({
+      paragraphElement: typerParagraphFirst.current,
+      loop: false,
+      loopAfterSeconds: 6
+    });
 
     setTimeout(() => {
       consoleTyperFirst
@@ -41,6 +45,9 @@ const Experience = () => {
           <h4 className="experience-page__subtitle">
             Software Engineer
           </h4>
+          <a className="experience-page-link print-only" href="https://www.danielzamorano.pro">
+            www.danielzamorano.pro
+          </a>
         </div>
         <div className="experience-page__intro">
           <TerminalWindow>

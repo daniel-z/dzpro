@@ -67,3 +67,88 @@ $text-paragraph-bg-color: $black;
     }
   }
 }
+
+// Printing Styles
+
+@media print {
+  .experience-page {
+    text-align: center;
+    padding: 0;
+
+    &__content {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    &__subtitle {
+      margin-bottom: 0;
+    }
+
+    &__intro {
+      margin: 0;
+
+      .terminal-window {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+
+        &__header {
+          display: none;
+        }
+
+        &__body {
+          background-color: transparent;
+        }
+      }
+    }
+
+    &__editor{
+      .editor-window {
+        border: none;
+        box-shadow: none;
+
+        &__header {
+          display: none;
+        }
+
+        .editor-tab {
+          margin-left: 30px;
+          font-size: 28px;
+          background-color: transparent;
+          box-shadow: none;
+          font-weight: bold;
+          top: 0;
+        }
+
+        &__body {
+          padding-top: 0;
+          background-color: transparent;
+        }
+
+        .editor-content {
+          background-color: transparent;
+          padding-top: 40px;
+        }
+      }
+
+      .job {
+        &__description {
+          margin-bottom: 5px;
+        }
+
+        &__keywords {
+          margin-bottom: 0;
+
+          span {
+            margin: 0;
+            padding: 0 5px;
+          }
+        }
+    
+        p {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
