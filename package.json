@@ -2,6 +2,9 @@
   "name": "dzpro",
   "version": "0.1.0",
   "private": true,
+  "engines" : {
+    "node" : "10.15.1"
+  },
   "dependencies": {
     "@danielzm/particles-pointer-tracker": "^1.0.0",
     "dat.gui": "^0.7.5",
