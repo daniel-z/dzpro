@@ -3,7 +3,7 @@ node_js:
 - 10.15.1
 cache: yarn
 addons:
-  ssh_known_hosts: danielzamorano.pro
+  ssh_known_hosts: 68.183.160.56
 before_install:
 - openssl aes-256-cbc -K $encrypted_02bf80f113b7_key -iv $encrypted_02bf80f113b7_iv
   -in deployuser.enc -out ~/.ssh/deployuser -d
