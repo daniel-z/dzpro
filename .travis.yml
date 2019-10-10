@@ -12,7 +12,8 @@ script:
   - yarn test
   - yarn build
 deploy:
-- provider: script
+  skip_cleanup: true
+  provider: script
   script: bash .travis/deploy.sh
   on:
     branch: master
