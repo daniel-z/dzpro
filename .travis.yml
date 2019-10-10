@@ -1,18 +1,25 @@
 language: node_js
+
 node_js:
-- 10.15.1
-cache: yarn
+  - 10.15.1
+
+  cache: yarn
+
 addons:
   ssh_known_hosts: danielzamorano.pro
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_02bf80f113b7_key -iv $encrypted_02bf80f113b7_iv
-  -in deployuser.enc -out ~/.ssh/deployuser -d
-- chmod 600 ~/.ssh/deployuser
-  script:
-  - yarn test
-  - yarn build
+  - openssl aes-256-cbc -K $encrypted_02bf80f113b7_key -iv $encrypted_02bf80f113b7_iv -in deployuser.enc -out ~/.ssh/deployuser -d
+  - chmod 600 ~/.ssh/deployuser
+
+script:
+    - yarn test
+    - yarn build
+
 deploy:
-- provider: script
-  script: bash .travis/deploy.sh
+  - provider: script
   on:
     branch: master
+
+script:
+  bash .travis/deploy.sh
