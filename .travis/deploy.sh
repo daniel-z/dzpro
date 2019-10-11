@@ -4,7 +4,6 @@
 set -xe
 
 if [ $TRAVIS_BRANCH == "master" ] ; then
-
     # setup ssh agent, git config and remote
     eval "$(ssh-agent -s)"
     ssh-add deployuser
@@ -16,13 +15,9 @@ if [ $TRAVIS_BRANCH == "master" ] ; then
     rm -f .gitignore
     cp .travis/deployignore .gitignore
     git add build/
-    ls -lha
-    pwd
     git status # debug
     git commit -m "Deploy files"
     git push -f deploy HEAD:master
 else
-
     echo "No deploy script for branch '$TRAVIS_BRANCH'"
-
 fi
