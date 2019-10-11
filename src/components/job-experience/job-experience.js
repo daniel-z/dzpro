@@ -26,8 +26,9 @@ const JobExperienceElement = ({
         {company}
         / {dates}
       </span>
-      <p className="job__description">{description}</p>
-
+      { 
+        description.map(paragraph => (<p className="job__description">{paragraph}</p>))
+      }
       {projects && projects.length > 0 && <Projects company={company} projects={projects}/>}
 
       <p className="job__keywords">
