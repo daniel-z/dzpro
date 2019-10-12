@@ -67,9 +67,9 @@ const Home = () => {
             Different code experiments, nothing impressive but more about learning new
             technologies.
           </p>
-          <Link className="btn primary" to={ROUTES.CODE}>
+          <a className="btn primary" href={ROUTES.CODE}>
             See More
-          </Link>
+          </a>
         </section>
       </div>
     </div>
