@@ -6,17 +6,17 @@ set -xe
 if [ $TRAVIS_BRANCH == "master" ] ; then
     # setup ssh agent, git config and remote
     eval "$(ssh-agent -s)"
-    ssh-add deployuser
-    git remote add deploy "deploy@68.183.160.56:/var/www/danielzamorano.pro"
-    git config user.name "Travis CI"
-    git config user.email "travis@danielzamorano.pro"
+    ssh-add $KEY_PATH
+    git remote add deploy $REMOTE_REPO
+    git config user.name "$GIT_USERNAME"
+    git config user.email "$GIT_EMAIL"
 
     # commit compressed files and push it to remote
     rm -f .gitignore
     cp .travis/deployignore .gitignore
-    git add build/
+    git add $DEPLOY_FOLDER
     git status # debug
-    git commit -m "Deploy files"
+    git commit -m "$GIT_COMMIT_MESSAGE"
     git push -f deploy HEAD:master
 else
     echo "No deploy script for branch '$TRAVIS_BRANCH'"

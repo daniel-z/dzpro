@@ -17,3 +17,11 @@ deploy:
   script: bash .travis/deploy.sh
   on:
     branch: master
+env:
+  global:
+    - KEY_PATH="./deployuser"
+    - REMOTE_REPO="deploy@68.183.160.56:/var/www/danielzamorano.pro"
+    - GIT_USERNAME="Travis CI"
+    - GIT_EMAIL="travis@danielzamorano.pro"
+    - GIT_COMMIT_MESSAGE="New Deploy"
+    - DEPLOY_FOLDER="dist/"
