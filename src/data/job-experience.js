@@ -4,20 +4,26 @@ const JobExperienceData = [
     position: "Frontend Engineer",
     dates: "March 17 - Today",
     description: [
-      "Building high performance e-commerce sites for big brands like: Fitflop, Wilko, Solstice, using modern frameworks and technologies, working on SEO, accesibility, performance. Leading projects, recruiting and training.",
+      "Building high performance e-commerce sites for big brands like: Fitflop, Wilko, Solstice, Razr, using modern frameworks and technologies, working on SEO, accesibility, performance. Leading projects, recruiting and training.",
       "Participating in big e-commerce projects with teams from UK, Moldova and US, example: Fitflop.com where we released a complete replatform of the site and it was nominated as best e-commerce replatform in London.",
       "I lead the frontend work in the replatforming of solstice.com. I worked specially with accesibility, designing and implementing the new checkout.",
-      "I lead the first e-commerce project in México of the Tacit Knowledge, I can not mention the customer because is not released yet, but is the first Mexican company to be part of the New York Stock Exchange. I lead all the frontend work and also the design work, I had communication and multiple interactions with the customer."
+      "I lead the first Tacit Knowledge's e-commerce project in México, for the first Mexican company to be part of the New York Stock Exchange. I lead all the frontend work and also the design work. I had continuous communication with the customer."
     ],
     keywords: [
       "ReactJs",
+      "Redux",
       "Angular",
-      "Webpack",
+      "Ngrx",
+      "Rxjs",
       "Typescript",
+      "SCSS",
       "Hybris",
+      "Webpack",
       "karma",
-      "bootstrap",
+      "Bootstrap",
       "Unit Testing",
+      "Storybook",
+      "Sap Spartacus",
       "Design Systems"
     ]
   },
@@ -26,11 +32,12 @@ const JobExperienceData = [
     position: "CTO",
     dates: "June 2016 - March 2017",
     description: [
-      "Building a unique experiences marketplace. Hiring tech team, managing, organizing, developing, designing, taking development and business decisions. In charge of all Technology and team behind the platform. Leading designers and developers in the project.",
-      "I built and released a completelly transactional e-commerce site, using Python, Django, Angularjs, PostgreSQL, Heroku, Amazon Web Services, NodeJs, Google Analytics.",
-      "I participated in all technology decisions, contacting partners and providers, solving day to day problems in the processes and also business problems. I was part of all presentations with capital investors and we raised investments for around 1 million pesos."
+      "Building a unique experiences marketplace. Hiring tech team, managing, organizing, developing, designing, taking development and business decisions. In charge of all technology and team behind the platform. Leading designers and developers in the project.",
+      "I built and released a completelly transactional e-commerce site, using Python, Django, Angular, PostgreSQL, Heroku, Amazon Web Services, NodeJs, Google Analytics.",
+      "I participated in all technology decisions, contacting partners and providers, solving day to day problems in the processes and also business problems. I was involved presenting the company to capital investors and we raised investments for around 1 million MXN."
     ],
     keywords: [
+      "ReactJs",
       "Python",
       "Django",
       "Angularjs",
@@ -56,7 +63,7 @@ const JobExperienceData = [
       {
         name: "Vans Customs ​(California)",
         description:
-          "Developing the new interface and fixing frontend issues in the new Vans 3D interactive shoe configurator. Working with a distributed team in the US. Vans Customs"
+          "Developing the new interface for the new Vans 3D interactive shoe configurator. Working with a distributed team in the US. Vans Customs, https://www.vans.com/custom-shoes.html"
       },
       {
         name: "Basepath ​(Boston)",
@@ -102,7 +109,7 @@ const JobExperienceData = [
     position: "Software Engineer",
     dates: "February 2010 – June 2011",
     description: [
-      "Frontend/Backend development for a German company, Trained in Germany, working with linux, mac and osx equipments, doing OTRS software maintenance.",
+      "Frontend/Backend development for a German company, trained in Germany, working with linux, mac and osx equipments, doing OTRS software maintenance.",
       "I was responsible of survey project and the data encryption tool, solving complex performance issues. I did software development for German customers, supporting and interacting with customers and community, through forums, email lists etc."
     ],
     keywords: [
