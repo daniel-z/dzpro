@@ -27,7 +27,7 @@ const JobExperienceElement = ({
         / {dates}
       </span>
       { 
-        description.map(paragraph => (<p className="job__description">{paragraph}</p>))
+        description.map((paragraph, idx) => (<p className="job__description" key={idx}>{paragraph}</p>))
       }
       {projects && projects.length > 0 && <Projects company={company} projects={projects}/>}
 

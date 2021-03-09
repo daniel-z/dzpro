@@ -52,8 +52,10 @@ const Experience = () => {
         <div className="experience-page__intro">
           <TerminalWindow>
             <p className="experience-page__intro-text" ref={typerParagraphFirst}>
-              I code software solutions for the web and lead teams. I work on-site or
-              remotely. I like to learn, experiment, share and teach.
+              I have experience in different kind of web applications and companies from leading all the technology
+              decisions for startups to building and implementing opensource for government to building e-commerce
+              for big private companies. I have experience in very useful topics like SEO, Accessibility, leadership,
+              programming best practices, etc.
             </p>
           </TerminalWindow>
         </div>
