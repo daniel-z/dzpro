@@ -85,7 +85,8 @@ $text-paragraph-bg-color: $black;
     }
 
     &__intro {
-      margin: 0;
+      margin: 40px 0 20px;
+      font-size: 20px;
 
       .terminal-window {
         box-shadow: none;

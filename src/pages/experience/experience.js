@@ -52,10 +52,8 @@ const Experience = () => {
         <div className="experience-page__intro">
           <TerminalWindow>
             <p className="experience-page__intro-text" ref={typerParagraphFirst}>
-              I have experience in different kind of web applications and companies from leading all the technology
-              decisions for startups to building and implementing opensource for government to building e-commerce
-              for big private companies. I have experience in very useful topics like SEO, Accessibility, leadership,
-              programming best practices, etc.
+              I provide value to your projects through my experience with web applications.
+              I have experience with different kind of projects and companies. I have lead technology decisions for startups, I have built and implemented opensource software for the government and also e-commerce for private companies. I like to do Frontend and backend with javascript and I have experience in multiple frontend areas like SEO, accessibility, leadership, programming best practices, etc.
             </p>
           </TerminalWindow>
         </div>
