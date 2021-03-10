@@ -2,8 +2,8 @@
   "name": "dzpro",
   "version": "0.1.0",
   "private": true,
-  "engines" : {
-    "node" : "12.16.2"
+  "engines": {
+    "node": "14.16.0"
   },
   "dependencies": {
     "@danielzm/particles-pointer-tracker": "^1.0.0",
@@ -13,7 +13,8 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "3.1.1",
-    "skeleton-scss": "^2.0.4"
+    "skeleton-scss": "^2.0.4",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
